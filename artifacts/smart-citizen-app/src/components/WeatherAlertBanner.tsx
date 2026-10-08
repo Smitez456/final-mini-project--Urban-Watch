@@ -15,8 +15,8 @@ export function WeatherAlertBanner({ latitude, longitude, onSimulationChange }: 
 
   useEffect(() => {
     let active = true;
-    const lat = latitude ?? 19.076; // Default to Mumbai/demo coordinates if none provided
-    const lng = longitude ?? 72.8777;
+    const lat = latitude ?? 9.9312; // Default to Kochi, Kerala coordinates if none provided
+    const lng = longitude ?? 76.2673;
 
     setLoading(true);
     fetchCurrentWeather(lat, lng)

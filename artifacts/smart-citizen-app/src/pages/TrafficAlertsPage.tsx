@@ -17,13 +17,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-1',
     userId: null,
     type: 'TRAFFIC',
-    title: 'Signal Failure & Gridlock — Dadar TT Circle',
-    message: 'Traffic signal failure causing severe gridlock at Dadar TT Circle. Traffic police operating manually.',
+    title: 'High Congestion — Vytila Junction Gridlock',
+    message: 'Traffic signal failure causing severe gridlock at Vytila Mobility Hub junction. Traffic police operating manually.',
     severity: 'CRITICAL',
     complaintId: null,
-    latitude: 19.0178,
-    longitude: 72.8478,
-    location: 'Dadar TT Circle, Dadar',
+    latitude: 9.9664,
+    longitude: 76.3188,
+    location: 'Vytila Mobility Hub Junction, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 15,
     expiresAt: null,
@@ -36,13 +36,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-2',
     userId: null,
     type: 'FLOOD',
-    title: 'Waterlogging & Submerged Track — Hindmata',
-    message: 'Severe waterlogging under Hindmata flyover. Vehicles advised to reroute via Tilak Bridge.',
+    title: 'Waterlogging & Track Inundation — Ernakulam South',
+    message: 'Severe waterlogging under South Station railway underpass. Vehicles advised to reroute via SA Road.',
     severity: 'CRITICAL',
     complaintId: null,
-    latitude: 19.0087,
-    longitude: 72.8503,
-    location: 'Hindmata Junction, Parel',
+    latitude: 9.9678,
+    longitude: 76.2889,
+    location: 'Ernakulam South Station Road, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 45,
     expiresAt: null,
@@ -55,13 +55,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-3',
     userId: null,
     type: 'ROAD_HAZARD',
-    title: 'Deep Crater & Cave-in Risk — LBS Marg',
-    message: 'Multiple deep potholes and asphalt displacement near Kurla station entrance.',
+    title: 'Deep Crater & Cave-in Risk — MG Road, Ernakulam',
+    message: 'Multiple deep potholes and asphalt displacement near Padma Junction bus stop.',
     severity: 'HIGH',
     complaintId: null,
-    latitude: 19.0726,
-    longitude: 72.8794,
-    location: 'LBS Marg near Kurla Station',
+    latitude: 9.9723,
+    longitude: 76.2801,
+    location: 'MG Road near Padma Junction, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 90,
     expiresAt: null,
@@ -74,13 +74,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-4',
     userId: null,
     type: 'TRAFFIC',
-    title: 'Western Express Highway Congestion',
-    message: 'Heavy bumper-to-bumper traffic moving northbound towards Goregaon due to lane reduction.',
+    title: 'NH 66 Edappally Bypass Congestion',
+    message: 'Heavy bumper-to-bumper traffic moving northbound towards Kalamassery due to flyover maintenance.',
     severity: 'HIGH',
     complaintId: null,
-    latitude: 19.1197,
-    longitude: 72.8464,
-    location: 'Western Express Highway, Andheri',
+    latitude: 10.0261,
+    longitude: 76.3082,
+    location: 'NH 66 Bypass, Edappally, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 120,
     expiresAt: null,
@@ -93,13 +93,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-5',
     userId: null,
     type: 'HEAVY_RAIN',
-    title: 'Heavy Rain Warning — Andheri Subway',
-    message: 'Subway water level rising rapidly. Commuters advised to avoid low-lying underpasses.',
+    title: 'Heavy Rain Warning — Kaloor Underpass',
+    message: 'Kaloor underpass water level rising rapidly. Commuters advised to use Banerji Road.',
     severity: 'HIGH',
     complaintId: null,
-    latitude: 19.1190,
-    longitude: 72.8460,
-    location: 'Andheri Subway, Andheri West',
+    latitude: 9.9950,
+    longitude: 76.2960,
+    location: 'Kaloor Substation Road, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 150,
     expiresAt: null,
@@ -112,13 +112,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-6',
     userId: null,
     type: 'TRAFFIC',
-    title: 'Slow Movement — SV Road, Bandra',
-    message: 'Double parking and illegal loading obstructing traffic flow near station road.',
+    title: 'Signal Malfunction — Kaloor Junction',
+    message: 'Automated signal malfunction causing minor delays on MG Road heading towards Palarivattom.',
     severity: 'MEDIUM',
     complaintId: null,
-    latitude: 19.0544,
-    longitude: 72.8402,
-    location: 'SV Road near Bandra Station',
+    latitude: 9.9983,
+    longitude: 76.2929,
+    location: 'Kaloor Junction, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 200,
     expiresAt: null,
@@ -131,13 +131,13 @@ const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
     alertId: 'demo-alert-7',
     userId: null,
     type: 'ROAD_HAZARD',
-    title: 'Debris & Construction Material',
-    message: 'Unattended roadwork material blocking left lane on SV Road.',
+    title: 'Debris & Construction Material — Marine Drive',
+    message: 'Unattended roadwork material blocking left lane on Shanmugham Road.',
     severity: 'MEDIUM',
     complaintId: null,
-    latitude: 19.1555,
-    longitude: 72.8494,
-    location: 'SV Road, Goregaon West',
+    latitude: 9.9784,
+    longitude: 76.2760,
+    location: 'Shanmugham Road, Marine Drive, Kochi',
     radius: null,
     createdAt: NOW - 1000 * 60 * 300,
     expiresAt: null,
@@ -202,7 +202,7 @@ export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
       issue: a.issueType || 'Road Hazard',
       severity: a.severity,
       location: a.location || 'Unknown Roadway',
-      department: 'Public Works Department',
+      department: 'Kochi Municipal Corp PWD',
       status: a.isActive ? 'Active Hazard' : 'Resolved',
       reportedTime: new Date(a.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       latitude: a.latitude!,
@@ -227,14 +227,14 @@ export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
                   <Car size={16} strokeWidth={2.5} />
                 </span>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#ed735e]">
-                  Transit Safety
+                  Transit Safety — Kochi, Kerala
                 </p>
               </div>
               <h1 className="mt-2 font-mono text-3xl font-bold uppercase tracking-tight text-[#15353c] sm:text-4xl">
                 Active Traffic Alerts
               </h1>
               <p className="mt-1 text-xs text-[#52706d]">
-                Live road hazards, potholes, cave-ins, and flood obstructions impacting city transit.
+                Live road hazards, potholes, cave-ins, and flood obstructions impacting Kochi city transit.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="font-mono text-lg font-bold uppercase text-[#15353c]">
-                City Road Hazard Map
+                City Road Hazard Map — Kochi, Kerala
               </h2>
               <span className="text-[11px] font-bold uppercase text-[#52706d]">
                 {mapItems.length} active geolocated pin{mapItems.length !== 1 ? 's' : ''}

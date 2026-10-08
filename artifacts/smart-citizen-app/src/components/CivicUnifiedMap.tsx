@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ExternalLink, Filter } from 'lucide-react';
 import { Link } from 'wouter';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle, useMap } from 'react-leaflet';
@@ -28,48 +28,47 @@ export type CivicUnifiedMapProps = {
 
 type HazardCategory = 'TRAFFIC' | 'ROADS' | 'FLOOD';
 
-// ─── DEMO DATA ─────────────────────────────────────────────────────────────────
-// Mumbai-based realistic demo hazards shown when Firestore has no live alerts.
+// ─── KOCHI, KERALA DEMO DATA ───────────────────────────────────────────────────
 
 const DEMO_TRAFFIC_ITEMS: MapMarkerItem[] = [
   {
     id: 'demo-traffic-1',
     type: 'TRAFFIC',
-    title: '🚨 High Congestion — Western Express Hwy',
-    issue: 'Heavy Traffic Jam',
-    severity: 'HIGH',
-    location: 'Western Express Highway, Andheri',
-    department: 'Traffic Police',
+    title: '🚨 High Congestion — Vytila Junction',
+    issue: 'Heavy Traffic Gridlock',
+    severity: 'CRITICAL',
+    location: 'Vytila Mobility Hub Junction, Kochi',
+    department: 'Kochi Traffic Police',
     status: 'Active Congestion',
     reportedTime: '08:45 AM',
-    latitude: 19.1197,
-    longitude: 72.8464,
+    latitude: 9.9664,
+    longitude: 76.3188,
   },
   {
     id: 'demo-traffic-2',
     type: 'TRAFFIC',
-    title: '🚨 Signal Failure — Dadar Junction',
-    issue: 'Signal Malfunction',
-    severity: 'CRITICAL',
-    location: 'Dadar TT Circle, Dadar',
-    department: 'Traffic Police',
+    title: '🚨 Signal Malfunction — Kaloor Junction',
+    issue: 'Signal Failure',
+    severity: 'HIGH',
+    location: 'Kaloor Junction, MG Road, Kochi',
+    department: 'Kochi Traffic Police',
     status: 'Active Advisory',
     reportedTime: '09:12 AM',
-    latitude: 19.0178,
-    longitude: 72.8478,
+    latitude: 9.9983,
+    longitude: 76.2929,
   },
   {
     id: 'demo-traffic-3',
     type: 'TRAFFIC',
-    title: '🚨 Slow Movement — SV Road, Bandra',
-    issue: 'Lane Blockage',
+    title: '🚨 Slow Movement — Edappally Toll Bypass',
+    issue: 'Bypass Bottleneck',
     severity: 'MEDIUM',
-    location: 'SV Road near Bandra Station',
-    department: 'Traffic Police',
+    location: 'NH 66 Bypass, Edappally, Kochi',
+    department: 'Kochi Traffic Police',
     status: 'Active Slowdown',
     reportedTime: '10:30 AM',
-    latitude: 19.0544,
-    longitude: 72.8402,
+    latitude: 10.0261,
+    longitude: 76.3082,
   },
 ];
 
@@ -77,41 +76,41 @@ const DEMO_ROAD_ITEMS: MapMarkerItem[] = [
   {
     id: 'demo-road-1',
     type: 'ROAD_HAZARD',
-    title: '⚠️ Deep Pothole — LBS Marg',
+    title: '⚠️ Deep Pothole — MG Road, Ernakulam',
     issue: 'Pothole',
     severity: 'HIGH',
-    location: 'LBS Marg near Kurla Station',
-    department: 'Public Works Dept',
+    location: 'MG Road near Padma Junction, Kochi',
+    department: 'Kochi Municipal Corp PWD',
     status: 'Active Hazard',
     reportedTime: '07:20 AM',
-    latitude: 19.0726,
-    longitude: 72.8794,
+    latitude: 9.9723,
+    longitude: 76.2801,
   },
   {
     id: 'demo-road-2',
     type: 'POTHOLE',
-    title: '⚠️ Road Cave-in — Sion',
-    issue: 'Road Damage',
+    title: '⚠️ Road Cave-in — Kakkanad InfoPark Road',
+    issue: 'Asphalt Damage',
     severity: 'CRITICAL',
-    location: 'Sion-Panvel Highway, Sion',
-    department: 'Public Works Dept',
+    location: 'InfoPark Expressway, Kakkanad, Kochi',
+    department: 'Kochi Municipal Corp PWD',
     status: 'Active Hazard',
     reportedTime: '06:45 AM',
-    latitude: 19.0402,
-    longitude: 72.8620,
+    latitude: 10.0090,
+    longitude: 76.3620,
   },
   {
     id: 'demo-road-3',
     type: 'ROAD_HAZARD',
-    title: '⚠️ Debris on Road — Goregaon',
+    title: '⚠️ Debris on Road — Marine Drive',
     issue: 'Road Obstruction',
     severity: 'MEDIUM',
-    location: 'SV Road, Goregaon West',
-    department: 'Public Works Dept',
+    location: 'Shanmugham Road, Marine Drive, Kochi',
+    department: 'Kochi Municipal Corp PWD',
     status: 'Active Hazard',
     reportedTime: '11:05 AM',
-    latitude: 19.1555,
-    longitude: 72.8494,
+    latitude: 9.9784,
+    longitude: 76.2760,
   },
 ];
 
@@ -119,54 +118,41 @@ const DEMO_FLOOD_ITEMS: MapMarkerItem[] = [
   {
     id: 'demo-flood-1',
     type: 'FLOOD',
-    title: '🌊 Waterlogging — Hindmata Junction',
-    issue: 'Flood',
+    title: '🌊 Waterlogging — Ernakulam South Station',
+    issue: 'Severe Flood Zone',
     severity: 'CRITICAL',
-    location: 'Hindmata Junction, Parel',
-    department: 'Storm Water Dept',
+    location: 'Ernakulam South Station Road, Kochi',
+    department: 'Drainage & Disaster Mgt',
     status: 'Active Flood Zone',
     reportedTime: '06:00 AM',
-    latitude: 19.0087,
-    longitude: 72.8503,
+    latitude: 9.9678,
+    longitude: 76.2889,
   },
   {
     id: 'demo-flood-2',
     type: 'HEAVY_RAIN',
-    title: '🌧️ Heavy Rainfall — Andheri Subway',
+    title: '🌧️ Heavy Rain Warning — Kaloor Underpass',
     issue: 'Heavy Rain',
     severity: 'HIGH',
-    location: 'Andheri Subway, Andheri West',
-    department: 'Storm Water Dept',
+    location: 'Kaloor Substation Road, Kochi',
+    department: 'Drainage & Disaster Mgt',
     status: 'Active Warning',
     reportedTime: '07:30 AM',
-    latitude: 19.1190,
-    longitude: 72.8460,
+    latitude: 9.9950,
+    longitude: 76.2960,
   },
   {
     id: 'demo-flood-3',
     type: 'FLOOD',
-    title: '🌊 Street Flooding — Milan Subway',
-    issue: 'Flood',
+    title: '🌊 Tidal Waterlogging — Fort Kochi Beach Road',
+    issue: 'Coastal Inundation',
     severity: 'HIGH',
-    location: 'Milan Subway, Vile Parle',
-    department: 'Storm Water Dept',
+    location: 'Tower Road, Fort Kochi, Kerala',
+    department: 'Coastal Hazard Mgt',
     status: 'Active Flood Zone',
     reportedTime: '08:15 AM',
-    latitude: 19.0969,
-    longitude: 72.8442,
-  },
-  {
-    id: 'demo-flood-4',
-    type: 'HEAVY_RAIN',
-    title: '🌧️ Waterlogging — King Circle',
-    issue: 'Heavy Rain',
-    severity: 'MEDIUM',
-    location: 'King Circle, Matunga',
-    department: 'Storm Water Dept',
-    status: 'Active Warning',
-    reportedTime: '09:00 AM',
-    latitude: 19.0225,
-    longitude: 72.8587,
+    latitude: 9.9658,
+    longitude: 76.2425,
   },
 ];
 
@@ -176,8 +162,7 @@ const ALL_DEMO_ITEMS: MapMarkerItem[] = [
   ...DEMO_FLOOD_ITEMS,
 ];
 
-// ─── TRAFFIC ROUTE OVERLAYS ────────────────────────────────────────────────────
-// Red polylines along major Mumbai road segments to show congestion.
+// ─── KOCHI TRAFFIC ROUTE OVERLAYS ───────────────────────────────────────────────
 
 type TrafficRoute = {
   id: string;
@@ -188,70 +173,55 @@ type TrafficRoute = {
 
 const TRAFFIC_ROUTES: TrafficRoute[] = [
   {
-    id: 'route-weh',
-    name: 'Western Express Hwy — Andheri to Goregaon',
-    severity: 'HIGH',
-    coords: [
-      [19.1197, 72.8464],
-      [19.1280, 72.8470],
-      [19.1370, 72.8475],
-      [19.1450, 72.8480],
-      [19.1555, 72.8494],
-    ],
-  },
-  {
-    id: 'route-sv-road',
-    name: 'SV Road — Bandra to Khar',
-    severity: 'MEDIUM',
-    coords: [
-      [19.0544, 72.8402],
-      [19.0590, 72.8395],
-      [19.0630, 72.8390],
-      [19.0700, 72.8385],
-    ],
-  },
-  {
-    id: 'route-dadar',
-    name: 'Dadar TT — Junction Gridlock',
+    id: 'route-vytila',
+    name: 'Vytila Flyover & NH 66 Stretch',
     severity: 'CRITICAL',
     coords: [
-      [19.0140, 72.8450],
-      [19.0158, 72.8465],
-      [19.0178, 72.8478],
-      [19.0200, 72.8490],
-      [19.0220, 72.8500],
+      [9.9600, 76.3150],
+      [9.9630, 76.3170],
+      [9.9664, 76.3188],
+      [9.9710, 76.3195],
+      [9.9780, 76.3170],
     ],
   },
   {
-    id: 'route-lbs',
-    name: 'LBS Marg — Kurla to Sion',
+    id: 'route-mg-road',
+    name: 'MG Road — Jose Junction to Kaloor',
     severity: 'HIGH',
     coords: [
-      [19.0726, 72.8794],
-      [19.0650, 72.8750],
-      [19.0570, 72.8700],
-      [19.0480, 72.8660],
-      [19.0402, 72.8620],
+      [9.9650, 76.2830],
+      [9.9723, 76.2801],
+      [9.9850, 76.2850],
+      [9.9983, 76.2929],
+    ],
+  },
+  {
+    id: 'route-bypass',
+    name: 'Edappally NH Bypass',
+    severity: 'MEDIUM',
+    coords: [
+      [10.0150, 76.3070],
+      [10.0200, 76.3075],
+      [10.0261, 76.3082],
+      [10.0330, 76.3090],
     ],
   },
 ];
 
-// ─── FLOOD ZONE OVERLAYS ───────────────────────────────────────────────────────
-// Blue pulsing circles representing waterlogged/flood-affected areas.
+// ─── KOCHI FLOOD ZONE OVERLAYS ─────────────────────────────────────────────────
 
 type FloodZone = {
   id: string;
   name: string;
   severity: 'MEDIUM' | 'HIGH' | 'CRITICAL';
   center: [number, number];
-  radius: number; // meters
+  radius: number;
 };
 
 const FLOOD_ZONES: FloodZone[] = [
-  { id: 'fzone-hindmata', name: 'Hindmata Junction', severity: 'CRITICAL', center: [19.0087, 72.8503], radius: 350 },
-  { id: 'fzone-andheri', name: 'Andheri Subway', severity: 'HIGH', center: [19.1190, 72.8460], radius: 280 },
-  { id: 'fzone-milan', name: 'Milan Subway', severity: 'HIGH', center: [19.0969, 72.8442], radius: 250 },
-  { id: 'fzone-king', name: 'King Circle', severity: 'MEDIUM', center: [19.0225, 72.8587], radius: 200 },
+  { id: 'fzone-south', name: 'Ernakulam South Station', severity: 'CRITICAL', center: [9.9678, 76.2889], radius: 320 },
+  { id: 'fzone-kaloor', name: 'Kaloor Lowlands', severity: 'HIGH', center: [9.9950, 76.2960], radius: 260 },
+  { id: 'fzone-fortkochi', name: 'Fort Kochi Waterfront', severity: 'HIGH', center: [9.9658, 76.2425], radius: 280 },
 ];
 
 // ─── HELPERS ───────────────────────────────────────────────────────────────────
@@ -325,14 +295,12 @@ function MapController({ targetLocation }: { targetLocation: [number, number] | 
 
   useEffect(() => {
     if (targetLocation && !isNaN(targetLocation[0]) && !isNaN(targetLocation[1])) {
-      map.flyTo(targetLocation, 15, { duration: 0.8 });
+      map.flyTo(targetLocation, 14, { duration: 0.8 });
     }
   }, [targetLocation, map]);
 
   return null;
 }
-
-// ─── TRAFFIC LINE COLORS ───────────────────────────────────────────────────────
 
 function trafficColor(severity: string): string {
   if (severity === 'CRITICAL') return '#dc2626';
@@ -352,22 +320,19 @@ function floodFillColor(severity: string): string {
   return '#93c5fd';
 }
 
-// ─── MAIN COMPONENT ────────────────────────────────────────────────────────────
-
-const DEFAULT_MUMBAI_CENTER: [number, number] = [19.076, 72.8777];
+// ─── KOCHI DEFAULT CENTER ──────────────────────────────────────────────────────
+const DEFAULT_KOCHI_CENTER: [number, number] = [9.9312, 76.2673];
 
 export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUnifiedMapProps) {
   const [filterType, setFilterType] = useState<string>('ALL');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [targetLocation, setTargetLocation] = useState<[number, number] | null>(null);
 
-  // Merge Firestore items with demo data (demo items are always available for display)
   const allItems = useMemo(() => {
     if (items.length > 0) return items;
     return ALL_DEMO_ITEMS;
   }, [items]);
 
-  // Filter items by category
   const filteredItems = useMemo(() => {
     return allItems.filter((item) => {
       const lat = Number(item.latitude);
@@ -384,18 +349,15 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
     });
   }, [allItems, filterType]);
 
-  // Which overlays are visible
   const showTrafficLines = filterType === 'ALL' || filterType === 'TRAFFIC';
   const showFloodZones = filterType === 'ALL' || filterType === 'FLOOD';
 
-  // Selected item
   const activeFocus = useMemo(() => {
     if (filteredItems.length === 0) return null;
     const match = filteredItems.find((item) => item.id === selectedId);
     return match ?? filteredItems[0];
   }, [filteredItems, selectedId]);
 
-  // Auto-select first item when filter changes or data loads
   useEffect(() => {
     if (filteredItems.length === 0) {
       setSelectedId(null);
@@ -428,14 +390,13 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
     if (userLocation && !isNaN(Number(userLocation.latitude)) && !isNaN(Number(userLocation.longitude))) {
       return [Number(userLocation.latitude), Number(userLocation.longitude)];
     }
-    return DEFAULT_MUMBAI_CENTER;
+    return DEFAULT_KOCHI_CENTER;
   }, [activeFocus, userLocation]);
 
   const largerMapUrl = activeFocus
     ? `https://www.openstreetmap.org/?mlat=${Number(activeFocus.latitude)}&mlon=${Number(activeFocus.longitude)}#map=15/${Number(activeFocus.latitude)}/${Number(activeFocus.longitude)}`
-    : `https://www.openstreetmap.org/#map=12/${DEFAULT_MUMBAI_CENTER[0]}/${DEFAULT_MUMBAI_CENTER[1]}`;
+    : `https://www.openstreetmap.org/#map=13/${DEFAULT_KOCHI_CENTER[0]}/${DEFAULT_KOCHI_CENTER[1]}`;
 
-  // Category counts for filter labels
   const countByCategory = useMemo(() => {
     let traffic = 0, roads = 0, flood = 0;
     for (const item of allItems) {
@@ -454,7 +415,7 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
         <div className="flex items-center gap-2">
           <Filter size={14} className="text-[#ed735e]" />
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#15353c]">
-            Display Layer:
+            Display Layer (Kochi, Kerala):
           </span>
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
@@ -509,7 +470,7 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
           <div className="h-[360px] sm:h-[420px] w-full">
             <MapContainer
               center={initialCenter}
-              zoom={12}
+              zoom={13}
               scrollWheelZoom={true}
               style={{ height: '100%', width: '100%' }}
             >
@@ -519,7 +480,7 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
               />
               <MapController targetLocation={targetLocation} />
 
-              {/* ── TRAFFIC ROUTE LINES (red lines on roads) ──────────── */}
+              {/* ── TRAFFIC ROUTE LINES ───────────────────────────────── */}
               {showTrafficLines &&
                 TRAFFIC_ROUTES.map((route) => (
                   <Polyline
@@ -536,7 +497,7 @@ export function CivicUnifiedMap({ items, userLocation, className = '' }: CivicUn
                   />
                 ))}
 
-              {/* ── FLOOD ZONE CIRCLES (blue spots) ──────────────────── */}
+              {/* ── FLOOD ZONE CIRCLES ───────────────────────────────── */}
               {showFloodZones &&
                 FLOOD_ZONES.map((zone) => (
                   <Circle
