@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Car, AlertTriangle, MapPin, Navigation, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { Car, MapPin, Navigation, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'wouter';
 import { getActiveTrafficAlerts } from '@/lib/firestore';
 import { haversineDistanceMeters } from '@/lib/trafficRisk';
@@ -9,6 +9,144 @@ import type { StoredAlert } from '@/lib/alertTypes';
 export type TrafficAlertsPageProps = {
   Shell: React.ComponentType<{ children: React.ReactNode }>;
 };
+
+const NOW = Date.now();
+
+const DEMO_FALLBACK_ALERTS: StoredAlert[] = [
+  {
+    alertId: 'demo-alert-1',
+    userId: null,
+    type: 'TRAFFIC',
+    title: 'Signal Failure & Gridlock — Dadar TT Circle',
+    message: 'Traffic signal failure causing severe gridlock at Dadar TT Circle. Traffic police operating manually.',
+    severity: 'CRITICAL',
+    complaintId: null,
+    latitude: 19.0178,
+    longitude: 72.8478,
+    location: 'Dadar TT Circle, Dadar',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 15,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'Critical',
+    issueType: 'Signal Malfunction',
+  },
+  {
+    alertId: 'demo-alert-2',
+    userId: null,
+    type: 'FLOOD',
+    title: 'Waterlogging & Submerged Track — Hindmata',
+    message: 'Severe waterlogging under Hindmata flyover. Vehicles advised to reroute via Tilak Bridge.',
+    severity: 'CRITICAL',
+    complaintId: null,
+    latitude: 19.0087,
+    longitude: 72.8503,
+    location: 'Hindmata Junction, Parel',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 45,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'Critical',
+    issueType: 'Flood Zone',
+  },
+  {
+    alertId: 'demo-alert-3',
+    userId: null,
+    type: 'ROAD_HAZARD',
+    title: 'Deep Crater & Cave-in Risk — LBS Marg',
+    message: 'Multiple deep potholes and asphalt displacement near Kurla station entrance.',
+    severity: 'HIGH',
+    complaintId: null,
+    latitude: 19.0726,
+    longitude: 72.8794,
+    location: 'LBS Marg near Kurla Station',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 90,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'High',
+    issueType: 'Pothole Hazard',
+  },
+  {
+    alertId: 'demo-alert-4',
+    userId: null,
+    type: 'TRAFFIC',
+    title: 'Western Express Highway Congestion',
+    message: 'Heavy bumper-to-bumper traffic moving northbound towards Goregaon due to lane reduction.',
+    severity: 'HIGH',
+    complaintId: null,
+    latitude: 19.1197,
+    longitude: 72.8464,
+    location: 'Western Express Highway, Andheri',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 120,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'High',
+    issueType: 'Traffic Jam',
+  },
+  {
+    alertId: 'demo-alert-5',
+    userId: null,
+    type: 'HEAVY_RAIN',
+    title: 'Heavy Rain Warning — Andheri Subway',
+    message: 'Subway water level rising rapidly. Commuters advised to avoid low-lying underpasses.',
+    severity: 'HIGH',
+    complaintId: null,
+    latitude: 19.1190,
+    longitude: 72.8460,
+    location: 'Andheri Subway, Andheri West',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 150,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'High',
+    issueType: 'Heavy Rain',
+  },
+  {
+    alertId: 'demo-alert-6',
+    userId: null,
+    type: 'TRAFFIC',
+    title: 'Slow Movement — SV Road, Bandra',
+    message: 'Double parking and illegal loading obstructing traffic flow near station road.',
+    severity: 'MEDIUM',
+    complaintId: null,
+    latitude: 19.0544,
+    longitude: 72.8402,
+    location: 'SV Road near Bandra Station',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 200,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'Medium',
+    issueType: 'Traffic Slowdown',
+  },
+  {
+    alertId: 'demo-alert-7',
+    userId: null,
+    type: 'ROAD_HAZARD',
+    title: 'Debris & Construction Material',
+    message: 'Unattended roadwork material blocking left lane on SV Road.',
+    severity: 'MEDIUM',
+    complaintId: null,
+    latitude: 19.1555,
+    longitude: 72.8494,
+    location: 'SV Road, Goregaon West',
+    radius: null,
+    createdAt: NOW - 1000 * 60 * 300,
+    expiresAt: null,
+    isRead: false,
+    isActive: true,
+    trafficRisk: 'Medium',
+    issueType: 'Road Obstruction',
+  },
+];
 
 export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
   const [alerts, setAlerts] = useState<StoredAlert[]>([]);
@@ -53,7 +191,9 @@ export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
     );
   }
 
-  const mapItems: MapMarkerItem[] = alerts
+  const effectiveAlerts = alerts.length > 0 ? alerts : DEMO_FALLBACK_ALERTS;
+
+  const mapItems: MapMarkerItem[] = effectiveAlerts
     .filter((a) => a.latitude != null && a.longitude != null)
     .map((a) => ({
       id: a.alertId,
@@ -70,7 +210,7 @@ export function TrafficAlertsPage({ Shell }: TrafficAlertsPageProps) {
       complaintId: a.complaintId,
     }));
 
-  const filteredAlerts = alerts.filter((item) => {
+  const filteredAlerts = effectiveAlerts.filter((item) => {
     if (severityFilter === 'ALL') return true;
     return item.severity === severityFilter;
   });
