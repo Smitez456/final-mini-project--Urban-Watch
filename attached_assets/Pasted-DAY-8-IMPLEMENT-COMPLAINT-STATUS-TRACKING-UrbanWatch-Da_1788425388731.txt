@@ -1,0 +1,235 @@
+DAY 8 — IMPLEMENT COMPLAINT STATUS TRACKING
+
+UrbanWatch Days 3–7 are already implemented and working.
+
+I now want to implement DAY 8: COMPLAINT TRACKING.
+
+IMPORTANT:
+Do NOT break or redesign existing functionality.
+
+Do NOT modify:
+- Firebase Authentication
+- Firebase Firestore architecture
+- Cloudinary upload
+- GPS functionality
+- OpenStreetMap/Leaflet
+- AI image classification
+- Project Presentation
+
+Make the smallest changes necessary.
+
+==================================================
+GOAL
+==================================================
+
+Implement a proper complaint status lifecycle:
+
+Submitted
+Under Review
+In Progress
+Resolved
+
+The existing Firestore field is:
+
+status
+
+Use this existing field rather than creating a second status system.
+
+==================================================
+CITIZEN SIDE
+==================================================
+
+Update My Complaints and Complaint Details so citizens can clearly see:
+
+- Current status
+- Issue category
+- Complaint ID
+- Date submitted
+- Location
+- Image
+- Description
+- GPS/map when available
+
+Use clear visual status indicators.
+
+Example:
+
+Submitted       ✓
+Under Review    ✓
+In Progress    ●
+Resolved       ○
+
+The exact visual design should match the existing UrbanWatch UI.
+
+Do not redesign the entire application.
+
+==================================================
+COMPLAINT DETAILS
+==================================================
+
+On the Complaint Details page, show a status timeline/progress indicator:
+
+Submitted
+    ↓
+Under Review
+    ↓
+In Progress
+    ↓
+Resolved
+
+Highlight the current status.
+
+If the complaint is Resolved, clearly show that it has been resolved.
+
+==================================================
+ADMIN SIDE
+==================================================
+
+Admin users must be able to update complaint status.
+
+Use the existing Admin Dashboard.
+
+Allow status changes between:
+
+Submitted
+Under Review
+In Progress
+Resolved
+
+When an admin changes the status:
+
+1. Update the existing Firestore complaint document.
+2. Preserve all other complaint fields.
+3. Do not overwrite:
+   - imageUrl
+   - latitude
+   - longitude
+   - issueType
+   - description
+   - title
+   - location
+   - user information
+4. The citizen should see the updated status when they open My Complaints or Complaint Details.
+
+==================================================
+STATUS VALIDATION
+==================================================
+
+Only allow these exact status values:
+
+Submitted
+Under Review
+In Progress
+Resolved
+
+Do not allow arbitrary status strings.
+
+If an invalid status is supplied, reject it.
+
+==================================================
+REAL-TIME / REFRESH
+==================================================
+
+Use the existing Firestore architecture.
+
+If practical, update the citizen's complaint view automatically when the status changes.
+
+Otherwise ensure the updated status appears correctly after refreshing/reopening the complaint.
+
+Do NOT introduce unnecessary dependencies.
+
+==================================================
+SECURITY
+==================================================
+
+Citizens must only be able to view their own complaints.
+
+Admin functionality must remain protected by the existing admin authorization mechanism.
+
+Do not expose administrative controls to normal citizens.
+
+Do not change Firebase Authentication.
+
+==================================================
+BACKWARD COMPATIBILITY
+==================================================
+
+Existing complaints must continue displaying correctly.
+
+If older complaints contain an existing status value, handle it safely.
+
+Do not delete existing complaint data.
+
+==================================================
+TESTING
+==================================================
+
+After implementation:
+
+1. Run TypeScript/type checking.
+2. Run production build.
+3. Restart workflows if required.
+4. Check browser console for errors.
+
+Then test:
+
+TEST 1:
+Create/open a complaint as a citizen.
+
+Verify:
+- complaint appears in My Complaints
+- status is visible
+- Complaint Details shows status timeline
+
+TEST 2:
+Open Admin Dashboard.
+
+Change a complaint:
+
+Submitted → Under Review
+
+Verify Firestore updates.
+
+TEST 3:
+Change:
+
+Under Review → In Progress
+
+Verify Firestore updates.
+
+TEST 4:
+Change:
+
+In Progress → Resolved
+
+Verify Firestore updates.
+
+TEST 5:
+Open the same complaint as the citizen.
+
+Verify the citizen sees:
+
+Resolved
+
+TEST 6:
+Verify that changing status did NOT remove or modify:
+- imageUrl
+- issueType
+- latitude
+- longitude
+- description
+- title
+- location
+
+At the end, report:
+
+1. Files modified
+2. Firestore changes
+3. Status values implemented
+4. Citizen-side changes
+5. Admin-side changes
+6. Tests performed
+7. Whether the complete status lifecycle worked
+8. Any remaining issues
+
+Do not modify the Project Presentation.

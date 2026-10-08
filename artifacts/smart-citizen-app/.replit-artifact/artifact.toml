@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "UrbanWatch"
+description = "A responsive frontend prototype for citizens and administrators to report, track, and manage civic issues. Day 1 includes page structure and navigation only; backend services will be added later."
+version = "1.0.0"
+id = "artifacts/smart-citizen-app"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25914
+
+[services.development]
+run = "pnpm --filter @workspace/smart-citizen-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-citizen-app", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/smart-citizen-app/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25914"
+BASE_PATH = "/"

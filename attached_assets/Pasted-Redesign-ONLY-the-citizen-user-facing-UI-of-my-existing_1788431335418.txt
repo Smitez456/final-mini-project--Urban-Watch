@@ -1,0 +1,597 @@
+Redesign ONLY the citizen/user-facing UI of my existing UrbanWatch application to make it feel like a unique, production-quality civic technology product rather than a generic dashboard template.
+
+IMPORTANT: Before changing anything, inspect the existing application and understand the current component structure and routes.
+
+## CORE RULE — DO NOT BREAK FUNCTIONALITY
+
+This is a UI/UX redesign, NOT a backend rewrite.
+
+DO NOT remove, replace, or break any existing functionality.
+
+The following are already working and MUST remain working exactly as they do now:
+
+* Firebase Authentication
+* Firebase Firestore
+* Cloudinary image uploads
+* AI image classification using the existing backend
+* AI category confirmation/change
+* GPS / browser geolocation
+* OpenStreetMap / Leaflet maps
+* Complaint creation
+* Complaint details
+* Complaint status tracking
+* Admin authentication and authorization
+* Admin Dashboard
+* Existing API routes
+* Existing Firestore schema
+* Existing security rules
+* Existing environment variables/secrets
+* Existing presentation/project files
+
+Do NOT introduce Firebase Storage.
+
+Do NOT change the database schema.
+
+Do NOT replace the AI provider.
+
+Do NOT modify the Admin Dashboard unless absolutely required for shared styling/components.
+
+Do NOT create fake functionality or fake AI.
+
+Do NOT hardcode new fake complaint statistics or fake user data.
+
+Use the existing real data and functionality.
+
+---
+
+# DESIGN DIRECTION
+
+Redesign the citizen experience around the concept:
+
+## "UrbanWatch — City Pulse"
+
+The product should feel like a modern civic platform where a citizen can:
+
+1. See what is happening around their neighbourhood
+2. Report a civic problem quickly
+3. Track what happens after reporting
+4. See their contribution to the community
+
+The design should communicate:
+
+* Civic
+* Modern
+* Local
+* Trustworthy
+* Action-oriented
+* Slightly futuristic
+* Clean
+* Human
+* Mobile-first
+
+It should NOT look like a generic banking dashboard, admin dashboard, CRM, or analytics template.
+
+---
+
+# VISUAL IDENTITY
+
+Keep the existing UrbanWatch brand direction but refine it.
+
+Primary visual language:
+
+* Deep teal / dark blue-green
+* Warm coral/orange for important actions
+* Warm off-white background
+* Soft mint/teal surfaces
+* Small amounts of amber for warnings
+* Green for resolved status
+* Red/coral for urgent issues
+
+Keep strong contrast and accessibility.
+
+Use rounded corners, but avoid making every element look like an identical rounded rectangle.
+
+Introduce visual hierarchy through:
+
+* typography
+* spacing
+* large numbers
+* image-based complaint cards
+* subtle map/road patterns
+* section labels
+* icons
+* status indicators
+
+Avoid excessive gradients.
+
+Avoid excessive glassmorphism.
+
+Avoid excessive animations.
+
+The result should look premium but still appropriate for a college project and civic application.
+
+---
+
+# 1. CITIZEN DASHBOARD
+
+Transform the current dashboard into a more distinctive "City Pulse" home screen.
+
+Current concept:
+
+"Small reports. Real change."
+
+Keep this message or improve it slightly.
+
+Create a stronger hero section with:
+
+* Greeting to the logged-in citizen
+* Short civic message
+* Large "Report an Issue" action
+* Subtle city/map/road visual treatment in the background
+* A small "City Pulse" or neighbourhood activity indicator
+
+Example visual concept:
+
+CITY PULSE
+
+"Your neighbourhood, one report at a time."
+
+Then show the user's real complaint activity.
+
+Instead of making the three statistics look like generic SaaS metric cards, make them more civic-focused:
+
+* Reports submitted
+* Currently being handled
+* Resolved
+
+Use the actual existing Firestore data.
+
+Add a visually interesting "Your impact" or "Community pulse" section if it can be derived from existing real data.
+
+Do NOT invent numbers.
+
+---
+
+# 2. RECENT COMPLAINTS
+
+Redesign complaint cards significantly.
+
+The complaint image should become a stronger visual element.
+
+Each complaint should communicate:
+
+* Issue image
+* Issue category
+* Title
+* Location
+* Date
+* Current status
+* GPS availability
+* View details action
+
+Use a strong visual status indicator.
+
+For example:
+
+RESOLVED
+●
+
+UNDER REVIEW
+●
+
+IN PROGRESS
+●
+
+SUBMITTED
+●
+
+Do not remove any existing complaint information.
+
+Keep clicking a complaint opening the existing Complaint Details page.
+
+---
+
+# 3. "REPORT AN ISSUE" EXPERIENCE
+
+This should become one of the strongest pages in the entire application.
+
+Instead of feeling like a long generic form, make it feel like a guided reporting process.
+
+Use a clear step structure such as:
+
+01
+WHAT HAPPENED?
+
+02
+WHERE IS IT?
+
+03
+SHOW US
+
+04
+REVIEW & SUBMIT
+
+Keep the existing functionality.
+
+The user must still be able to:
+
+* Enter issue title
+* Select issue type
+* Upload image
+* Get AI classification
+* Confirm/change AI category
+* Enter description
+* Enter manual location
+* Use current GPS location
+* View map/location information
+* Submit complaint
+
+Do not remove any fields.
+
+Make the AI functionality visually prominent.
+
+When an image is uploaded and analyzed, present the result as something like:
+
+AI ANALYSIS
+
+Detected issue
+Pothole
+
+98% confidence
+
+"Large water-filled depression with broken asphalt..."
+
+[Use this category]
+
+[Change category]
+
+Use the ACTUAL AI result already returned by the application.
+
+Do not fake confidence values or explanations.
+
+---
+
+# 4. LOCATION UI
+
+Make location feel like a core part of UrbanWatch.
+
+The current location section should visually communicate:
+
+📍 Location detected
+
+GPS coordinates available
+
+or
+
+📍 Manual location
+
+Use the existing GPS functionality.
+
+Keep:
+
+* Use My Current Location
+* Permission handling
+* Error messages
+* Manual location entry
+* Existing coordinates
+* Existing map
+
+Make the map preview feel integrated into the report rather than like an unrelated embedded map.
+
+---
+
+# 5. MY COMPLAINTS
+
+Redesign this page as a personal "My Civic Activity" area.
+
+Keep:
+
+* Search
+* Status filtering
+* Complaint count
+* All existing complaints
+* Images
+* Categories
+* GPS indicators
+* Status
+* View Details
+
+Make the status visually easier to scan.
+
+Consider giving the page a strong top section:
+
+MY CIVIC ACTIVITY
+
+"Here is what you've helped improve."
+
+Then show the real user's complaint data.
+
+Do not invent statistics.
+
+---
+
+# 6. COMPLAINT DETAILS
+
+Redesign the existing Complaint Details page to feel like a civic case/tracking page.
+
+The top should clearly show:
+
+ISSUE CATEGORY
+
+TITLE
+
+CURRENT STATUS
+
+Then show:
+
+* Image
+* Description
+* Location
+* GPS coordinates/map when available
+* AI classification information when stored
+* Complaint ID
+* Date
+* Status timeline
+
+Make the status timeline one of the most visually distinctive parts.
+
+For example:
+
+● Submitted
+│
+● Under Review
+│
+● In Progress
+│
+● Resolved
+
+Clearly highlight the current stage.
+
+Use the existing Firestore status value.
+
+Do not change the status workflow.
+
+---
+
+# 7. PROFILE
+
+Redesign the profile page so it feels like a citizen identity/profile rather than a generic account settings page.
+
+Keep:
+
+* Authenticated name
+* Email
+* Existing complaint/activity information
+* Logout
+* Existing profile functionality
+
+Create a stronger "Citizen Account" visual identity.
+
+---
+
+# 8. NAVIGATION
+
+Desktop:
+
+Keep the existing left navigation concept, but refine it.
+
+Make UrbanWatch branding more distinctive.
+
+Navigation:
+
+Home / Dashboard
+Report Issue
+My Complaints
+Profile
+
+The Report Issue action should visually stand out.
+
+Mobile:
+
+DO NOT simply shrink the desktop sidebar.
+
+Create a proper mobile navigation system.
+
+Use a bottom navigation bar with approximately:
+
+Home
+Report
+Complaints
+Profile
+
+The Report button can be visually emphasized as the primary action.
+
+On mobile, the sidebar should disappear/reorganize appropriately.
+
+---
+
+# 9. MOBILE-FIRST DESIGN
+
+This is extremely important because after this redesign I plan to turn UrbanWatch into a mobile application.
+
+Therefore, build the UI responsively from the beginning.
+
+Test at:
+
+* 375px
+* 390px
+* 412px
+* tablet width
+* desktop width
+* 1440px+
+
+Mobile requirements:
+
+* No horizontal scrolling
+* No clipped cards
+* No tiny text
+* Buttons easy to tap
+* Forms easy to use with one hand
+* Images scale correctly
+* Maps remain usable
+* Bottom navigation remains accessible
+* Important actions remain visible
+* Complaint cards become single-column
+* Dashboard sections stack naturally
+* Report form becomes a guided mobile experience
+
+---
+
+# 10. COMPONENT SYSTEM
+
+Create/reuse clean reusable UI components where appropriate.
+
+Examples:
+
+* CivicStat
+* ComplaintCard
+* StatusBadge
+* StatusTimeline
+* AIAnalysisCard
+* LocationCard
+* CityPulseCard
+* SectionLabel
+* MobileBottomNav
+
+Do not duplicate large amounts of UI code unnecessarily.
+
+Keep the existing React/TypeScript architecture.
+
+Use the existing UI libraries/components where possible.
+
+Do not introduce unnecessary dependencies.
+
+---
+
+# 11. MICRO-INTERACTIONS
+
+Add subtle professional interactions:
+
+* Button hover states
+* Card hover
+* Smooth navigation
+* Status transitions
+* Image preview transitions
+* Subtle entrance animation for major sections
+
+Keep animations fast and restrained.
+
+Do NOT make the app flashy.
+
+Respect reduced-motion accessibility preferences if possible.
+
+---
+
+# 12. BACKEND SAFETY
+
+After the redesign, verify that these still work:
+
+Firebase login
+Firebase registration
+Logout
+Firestore complaint creation
+Firestore complaint loading
+Complaint details
+Cloudinary upload
+AI image classification
+AI category confirmation/change
+GPS
+OpenStreetMap
+Status tracking
+Admin access
+
+Do not modify backend logic unless a UI change genuinely requires it.
+
+If shared code must be changed, make the smallest possible change.
+
+---
+
+# 13. DATA CONSISTENCY
+
+Use existing real data.
+
+Do not add fake complaints.
+
+Do not add fake AI results.
+
+Do not add fake GPS coordinates.
+
+Do not add fake statistics.
+
+If the UI displays a count, derive it from the same real data source currently being used.
+
+Keep all existing Firestore fields intact.
+
+---
+
+# 14. PRESENTATION QUALITY
+
+This application will be demonstrated as a college mini project.
+
+The redesigned citizen UI should look impressive in screenshots and live demonstration.
+
+Prioritize:
+
+1. Dashboard
+2. Report Issue
+3. AI analysis result
+4. GPS/map
+5. My Complaints
+6. Complaint status timeline
+7. Mobile layout
+
+These should look especially polished.
+
+---
+
+# 15. IMPORTANT: DO NOT REDESIGN EVERYTHING AT ONCE WITHOUT CHECKING
+
+First inspect the existing code and identify:
+
+* citizen routes
+* shared components
+* existing styling system
+* existing responsive behavior
+* existing data-fetching logic
+
+Then implement the visual redesign while preserving the working architecture.
+
+Do not rewrite the application from scratch.
+
+---
+
+# FINAL VERIFICATION
+
+After implementation:
+
+1. Run TypeScript/typecheck
+2. Run production build
+3. Restart the workflow
+4. Check browser console for errors
+5. Test desktop layout
+6. Test 390px mobile layout
+7. Log in
+8. Open Dashboard
+9. Open Report Issue
+10. Test existing complaint creation flow
+11. Verify AI flow still works
+12. Verify GPS still works
+13. Verify My Complaints still loads
+14. Verify Complaint Details still loads
+15. Verify Admin Dashboard still works
+16. Confirm Firebase Auth and Firestore were not replaced
+17. Confirm Cloudinary was not replaced
+18. Confirm no Firebase Storage was introduced
+
+At the end, report:
+
+* Which citizen pages were redesigned
+* Which reusable components were created
+* What mobile navigation was implemented
+* Whether backend functionality was preserved
+* Typecheck result
+* Build result
+* Browser/runtime result
+
+DO NOT modify the Project Presentation files during this task.
+DO NOT modify the Admin Dashboard design during this task.

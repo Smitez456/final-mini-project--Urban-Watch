@@ -1,0 +1,51 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "T_pIRipZUn5dkqHhAIPeq"
+uri = "file://.local/outputs/Smart-Citizen-Assistant-App.pptx"
+type = "slides"
+title = "Smart Citizen Assistant App.pptx"
+logical_id = "b47cddb6-268b-40ec-8c6f-c425eaa235a3"
+
+[[outputs]]
+id = "VLp7y1GH_lak9RqSkbGii"
+uri = "file://artifacts/smart-citizen-slides/speaker-script.md"
+type = "text"
+title = "Smart Citizen Assistant App — Speaker Script"
+logical_id = "f3dbfe14-1c56-44e7-b73f-4eabefb78b41"
+
+[[outputs]]
+id = "41FI-X8GnzYeWmMOKJlqN"
+uri = "file://.local/outputs/UrbanWatch-Preliminary-Presentation.pptx"
+type = "slides"
+title = "UrbanWatch Preliminary Presentation.pptx"
+logical_id = "10aeca4c-d00d-4c54-be56-149affe7d263"
+
+[[outputs]]
+id = "bWilIvjeIdBMrZHmNt7Z_"
+uri = "file://UrbanWatch_Frontend_Backend_Code_Explainer.md"
+type = "text"
+title = "UrbanWatch Frontend and Backend Code Explainer"
+description = "A presentation-ready guide containing the current React frontend, Firebase authentication, protected report flow, Firestore persistence, Express backend, secure Cloudinary upload route, architecture flow, security explanation, file map, and viva script."
+logical_id = "77c4e9a3-6f6e-4a65-a564-63285da26728"
+content_hash = "sha256:254cee92671180709ec0be564ca5f750d03a001ca90af5202722836bf1ac498a"
+size = 33138
+mtime_ms = 1788363277747
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:163e06a0-b87a-42ad-9453-3e29d2811f34/77c4e9a3-6f6e-4a65-a564-63285da26728/a2b18a58-f4d8-48c6-b0be-313fcb2bcc6d"
+storage_version_token = "1788363296529301"
+content_type = "text/markdown"
+
+[[outputs]]
+id = "fwQjL2jRzNLmt2YghMXIM"
+uri = "file://UrbanWatch_Presentation_Script_Slides_02-14.md"
+type = "text"
+title = "UrbanWatch Presentation Script — Slides 2–14"
+description = "A presentation-ready speaking script for Slides 2–14, assigned across Mark Sumesh Paul, Patrick John Paul, and Steve Sumesh Paul. Includes slide-by-slide explanations, handoffs, role confirmations, timeline wording, and reminders about implemented versus planned features."
+logical_id = "3c7eb850-3293-4a36-8dbe-1727e625f877"
+content_hash = "sha256:64245625aeb5f5057e0404538fa5acfaa1133c0b9bb50c89eba3a78570100d26"
+size = 17814
+mtime_ms = 1788366131816
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:163e06a0-b87a-42ad-9453-3e29d2811f34/3c7eb850-3293-4a36-8dbe-1727e625f877/632c1870-8601-4938-a619-e242bc55d30c"
+storage_version_token = "1788366140081690"
+content_type = "text/markdown"

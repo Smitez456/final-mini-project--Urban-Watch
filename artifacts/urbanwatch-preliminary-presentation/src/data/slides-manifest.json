@@ -1,0 +1,18 @@
+[
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce01","position":1,"filepath":"src/pages/slides/Slide01Title.tsx","title":"Title","description":"UrbanWatch preliminary presentation title slide.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce02","position":2,"filepath":"src/pages/slides/Slide02Motivation.tsx","title":"Motivation","description":"Motivation for a structured civic issue reporting workflow.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce03","position":3,"filepath":"src/pages/slides/Slide03Problem.tsx","title":"Problem Statement","description":"The fragmented intake, traceability, and triage problem.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce04","position":4,"filepath":"src/pages/slides/Slide04Objectives.tsx","title":"Goals and Objectives","description":"Primary goal and six implementation objectives.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce05","position":5,"filepath":"src/pages/slides/Slide05Risks.tsx","title":"Assumptions and Risks","description":"Project assumptions, risks, and controls.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce06","position":6,"filepath":"src/pages/slides/Slide06Scope.tsx","title":"Project Scope and Target Group","description":"Implemented scope, planned scope, and target users.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce07","position":7,"filepath":"src/pages/slides/Slide07Resources.tsx","title":"Resources Needed","description":"Frontend, backend, data, and media resources.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce08","position":8,"filepath":"src/pages/slides/Slide08LiteratureI.tsx","title":"Literature Survey I","description":"Five smart-city governance, inclusion, and AI papers.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce09","position":9,"filepath":"src/pages/slides/Slide09LiteratureII.tsx","title":"Literature Survey II","description":"Five pothole and road-defect detection papers.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce10","position":10,"filepath":"src/pages/slides/Slide10Architecture.tsx","title":"Architecture / Block Diagram","description":"UrbanWatch system architecture and secure upload path.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce11","position":11,"filepath":"src/pages/slides/Slide11Algorithms.tsx","title":"Algorithms Used","description":"Implemented workflow logic and planned AI algorithms.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce12","position":12,"filepath":"src/pages/slides/Slide12Roles.tsx","title":"Roles Assigned","description":"Placeholder project roles for four team members.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce13","position":13,"filepath":"src/pages/slides/Slide13Timeline.tsx","title":"Project Timeline","description":"Five-month academic project timeline.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce14","position":14,"filepath":"src/pages/slides/Slide14Conclusion.tsx","title":"Conclusion","description":"Summary of the implemented prototype and planned work.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce15","position":15,"filepath":"src/pages/slides/Slide15Evidence.tsx","title":"Code Snippets / Screenshots","description":"Actual UrbanWatch screenshots and sanitized implementation evidence.","speakerNotes":""},
+  {"id":"6f38cb1a-98de-4e1a-8f31-a188d917ce16","position":16,"filepath":"src/pages/slides/Slide16References.tsx","title":"References","description":"Verified citations for the ten literature survey papers.","speakerNotes":""}
+]

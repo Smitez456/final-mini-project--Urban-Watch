@@ -1,0 +1,108 @@
+Replace the current Firebase Storage implementation in my UrbanWatch project with Cloudinary for image uploads.
+
+IMPORTANT:
+
+* Keep Firebase Authentication exactly as it is.
+* Keep Firebase Firestore/database exactly as it is.
+* Do NOT delete or modify my existing Firebase Auth or Firestore functionality.
+* Remove the dependency on Firebase Storage for image uploads.
+* Do not ask me to upgrade Firebase to Blaze.
+* Do not change the existing UI/design unless necessary for the upload functionality.
+
+CLOUDINARY SETUP:
+I will provide these Cloudinary environment variables in Replit Secrets:
+
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+
+Never hard-code these values in the source code.
+Never expose CLOUDINARY_API_SECRET to the browser/client.
+Use Replit Secrets/environment variables.
+
+IMPLEMENTATION:
+
+1. Find every place in the project where Firebase Storage is currently used for uploading images.
+2. Replace those Firebase Storage upload operations with Cloudinary uploads.
+3. Create a secure backend/server-side upload endpoint that receives the image from the frontend and uploads it to Cloudinary.
+4. The Cloudinary API secret must only be used on the server.
+5. Validate uploaded files:
+
+   * Accept JPG, JPEG, PNG, and WEBP.
+   * Reject unsupported file types.
+   * Set a reasonable maximum image size of 10 MB.
+6. After a successful Cloudinary upload, get the secure HTTPS image URL returned by Cloudinary.
+7. Save that Cloudinary image URL in the appropriate Firebase Firestore document wherever the application currently saves the Firebase Storage download URL.
+8. If the existing Firestore document has a field such as imageUrl, photoUrl, image, attachmentUrl, or similar, preserve the existing field name instead of unnecessarily changing the database structure.
+9. Make sure existing images/records that already contain Firebase Storage URLs are not deleted or broken.
+10. If the user edits or deletes a report/post and the old implementation deleted the Firebase Storage image, implement the equivalent Cloudinary deletion functionality on the server where appropriate.
+11. Make sure users can still:
+
+    * Select an image.
+    * See an upload/loading state.
+    * Successfully upload the image.
+    * Submit the UrbanWatch report/post.
+    * See the uploaded image afterward.
+    * View the image from its Cloudinary HTTPS URL.
+12. Add proper error handling for:
+
+    * File too large.
+    * Invalid file type.
+    * Cloudinary authentication/configuration errors.
+    * Network/upload errors.
+    * Missing environment variables.
+13. Do not expose Cloudinary API secrets in frontend JavaScript, React code, browser network responses, or HTML.
+14. Do not upload images directly from the browser using the API secret.
+
+ENVIRONMENT VARIABLES:
+Use:
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+
+If the project uses Node.js/Express, use the appropriate official Cloudinary Node.js SDK or secure server-side Cloudinary API integration.
+
+If the project uses another backend framework, adapt the implementation to the existing project rather than restructuring the whole application.
+
+FIRESTORE:
+Continue using my existing Firebase configuration and Firestore implementation.
+Only replace the image-storage portion.
+The flow should be:
+
+Frontend
+→ Backend upload endpoint
+→ Cloudinary
+→ receive secure image URL
+→ Firestore stores image URL
+
+SECURITY:
+
+* Never put CLOUDINARY_API_SECRET in client-side code.
+* Never commit secrets to Git.
+* Use process.env / the existing Replit environment-variable mechanism.
+* Do not print the Cloudinary API secret in logs.
+
+BEFORE MODIFYING CODE:
+First inspect the existing project and identify:
+
+* Current Firebase Storage imports/usages.
+* Current image upload functions.
+* Current Firestore fields used for image URLs.
+* Existing backend/server structure.
+* Existing report/post creation and editing flow.
+
+Then implement the smallest possible change needed to replace Firebase Storage with Cloudinary.
+
+AFTER IMPLEMENTATION:
+
+* Run the project.
+* Test the image upload flow.
+* Fix any errors.
+* Confirm that Firebase Authentication still works.
+* Confirm that Firestore still works.
+* Confirm that uploaded images are stored in Cloudinary.
+* Confirm that Firestore stores the resulting Cloudinary HTTPS URL.
+* Tell me exactly which files you changed and what I need to add to Replit Secrets.
+
+Do not create a new application or rewrite the existing UrbanWatch project.
+Preserve the existing UI, authentication, Firestore database, routes, and functionality.

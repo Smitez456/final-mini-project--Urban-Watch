@@ -1,0 +1,1 @@
+- [UrbanWatch service scope](firebase-auth-scope.md) — Firebase, Cloudinary, click-triggered GPS/OpenStreetMap, and server-only OpenAI vision each have fixed boundaries.

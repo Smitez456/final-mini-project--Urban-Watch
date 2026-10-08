@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/urbanwatch-preliminary-presentation/"
+title = "UrbanWatch Preliminary Presentation"
+description = "A 16-slide college preliminary project presentation for UrbanWatch, an academic smart-city civic issue reporting prototype with Firebase authentication and Firestore complaints, Cloudinary image evidence, planned geolocation, AI-assisted classification, tracking, and an administrator dashboard."
+version = "1.0.0"
+id = "artifacts/urbanwatch-preliminary-presentation"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/urbanwatch-preliminary-presentation/" ]
+localPort = 21070
+
+[services.development]
+run = "pnpm --filter @workspace/urbanwatch-preliminary-presentation run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/urbanwatch-preliminary-presentation", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/urbanwatch-preliminary-presentation/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21070"
+BASE_PATH = "/urbanwatch-preliminary-presentation/"

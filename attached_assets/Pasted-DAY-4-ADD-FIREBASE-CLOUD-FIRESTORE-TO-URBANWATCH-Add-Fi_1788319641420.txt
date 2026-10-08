@@ -1,0 +1,61 @@
+DAY 4 — ADD FIREBASE CLOUD FIRESTORE TO URBANWATCH
+
+Add Firebase Cloud Firestore to the existing UrbanWatch application.
+
+IMPORTANT:
+- Do NOT modify the Project Presentation.
+- Do NOT add Firebase Storage yet.
+- Do NOT add GPS yet.
+- Do NOT add Maps yet.
+- Do NOT add AI yet.
+- Do NOT redesign the existing UI.
+- Keep the current authentication system and Firebase Email/Password login working.
+
+FIRESTORE:
+Create/use a Firestore collection called "complaints".
+
+When a logged-in citizen submits the existing Report Issue form, save a complaint document containing:
+
+- complaintId
+- userId
+- userName
+- userEmail
+- issueType
+- description
+- priority
+- status
+- imageUrl: null for now
+- latitude: null for now
+- longitude: null for now
+- createdAt
+
+Use the Firebase Authentication current user's UID for userId.
+
+Generate a unique complaint ID for every complaint.
+
+Set the initial complaint status to "Submitted" unless the existing application already has an appropriate initial status.
+
+MY COMPLAINTS:
+Update the existing My Complaints page so it reads complaints from Firestore and shows only complaints belonging to the currently logged-in user.
+
+COMPLAINT DETAILS:
+Update Complaint Details so that it loads the selected complaint from Firestore and displays its real information.
+
+ADMIN DASHBOARD:
+Update the existing Admin Dashboard so it loads all complaints from Firestore instead of relying on hard-coded sample complaint data.
+
+Keep the existing dashboard statistics and UI structure where possible, but make the complaint data come from Firestore.
+
+Add appropriate loading, empty, and error states.
+
+Do not create fake Firestore data automatically.
+
+Do not remove the existing Firebase Authentication functionality.
+
+After implementation:
+- Run TypeScript/type checks.
+- Run the production build.
+- Test submitting a complaint.
+- Test that it appears in My Complaints.
+- Test that the admin can see it.
+- Test that Complaint Details loads the saved complaint.

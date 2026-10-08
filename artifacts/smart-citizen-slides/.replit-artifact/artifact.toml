@@ -1,0 +1,27 @@
+kind = "slides"
+previewPath = "/smart-citizen-slides/"
+title = "Smart Citizen Assistant App"
+version = "1.0.0"
+id = "artifacts/smart-citizen-slides"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/smart-citizen-slides/" ]
+localPort = 22117
+
+[services.development]
+run = "pnpm --filter @workspace/smart-citizen-slides run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-citizen-slides", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/smart-citizen-slides/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22117"
+BASE_PATH = "/smart-citizen-slides/"

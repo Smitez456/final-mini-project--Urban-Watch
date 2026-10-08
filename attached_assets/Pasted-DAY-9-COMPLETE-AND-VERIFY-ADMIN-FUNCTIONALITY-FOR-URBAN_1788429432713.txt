@@ -1,0 +1,417 @@
+DAY 9 — COMPLETE AND VERIFY ADMIN FUNCTIONALITY FOR URBANWATCH
+
+UrbanWatch Days 3–8 are already implemented:
+
+- Firebase Authentication
+- Firebase Firestore
+- Cloudinary image uploads
+- GPS + OpenStreetMap/Leaflet
+- Real AI image classification
+- Complaint status tracking
+
+I now want to complete DAY 9: ADMIN FUNCTIONALITY.
+
+IMPORTANT:
+The existing Admin Dashboard UI is already designed and should NOT be rebuilt.
+
+Make the smallest changes necessary to make the existing Admin Dashboard fully functional with real Firestore data.
+
+==================================================
+DO NOT BREAK EXISTING FEATURES
+==================================================
+
+Do NOT modify or replace:
+
+- Firebase Authentication
+- Firebase admin authorization/custom claims
+- Firebase Firestore architecture
+- Cloudinary upload
+- AI classification
+- GPS
+- Maps
+- Citizen Dashboard
+- My Complaints
+- Complaint Details
+- Complaint submission
+- Project Presentation
+
+Do NOT redesign the existing application.
+
+Do NOT create fake/sample complaint data where real Firestore data is available.
+
+==================================================
+ADMIN ACCESS
+==================================================
+
+Keep the existing administrator authorization.
+
+Only authenticated administrators can access the Admin Dashboard.
+
+Normal citizens must NOT be able to:
+- view all complaints
+- change complaint status
+- access admin controls
+
+Do not weaken Firestore security rules.
+
+==================================================
+ADMIN DASHBOARD DATA
+==================================================
+
+The Admin Dashboard must use REAL Firestore complaint data.
+
+The dashboard should display accurate statistics such as:
+
+- Total complaints
+- Awaiting review
+- In progress
+- Resolved
+
+Calculate these from the actual complaints collection instead of hard-coded numbers.
+
+If there are zero complaints, show 0 rather than fake numbers.
+
+==================================================
+REPORTS NEEDING ATTENTION
+==================================================
+
+Use actual Firestore complaints.
+
+Prioritize reports that require administrator attention, such as:
+
+- Submitted
+- Under Review
+
+Display useful information:
+
+- Complaint ID
+- Issue category
+- Title
+- Location
+- Date
+- Current status
+- Image if available
+- GPS availability
+- AI classification if available
+
+Do not invent values.
+
+==================================================
+FILTERING
+==================================================
+
+Make the existing Admin Dashboard filters functional.
+
+Support filtering by:
+
+1. Status
+   - All
+   - Submitted
+   - Under Review
+   - In Progress
+   - Resolved
+
+2. Issue category where practical.
+
+3. Search by:
+   - complaint title
+   - complaint ID
+   - location
+
+Filtering should operate on the actual Firestore complaint data.
+
+Do not add unnecessary dependencies.
+
+==================================================
+ADMIN COMPLAINT REVIEW
+==================================================
+
+When an administrator opens a complaint, show:
+
+- Complaint ID
+- Citizen name
+- Citizen email
+- Issue title
+- Issue category
+- AI classification if available
+- Description
+- Image
+- Location
+- Latitude
+- Longitude
+- Map if GPS exists
+- Submission date
+- Current status
+
+The administrator must be able to change status.
+
+Allowed statuses:
+
+Submitted
+Under Review
+In Progress
+Resolved
+
+Use the existing status update functionality from Day 8.
+
+==================================================
+AI INFORMATION
+==================================================
+
+If the complaint was submitted with AI classification:
+
+Show:
+
+AI Detection:
+Pothole
+
+Confidence:
+98%
+
+Reason:
+...
+
+Do not invent AI information for older complaints.
+
+If no AI result exists, simply show that AI analysis was not available for that complaint.
+
+Do NOT call the AI model again just for displaying an existing complaint.
+
+==================================================
+IMAGE
+==================================================
+
+Display the existing Cloudinary image when imageUrl exists.
+
+Do not change the Cloudinary implementation.
+
+If imageUrl is null:
+
+Show an appropriate "No image uploaded" message.
+
+Do not break older complaints that may contain older image URLs.
+
+==================================================
+GPS / MAP
+==================================================
+
+If latitude and longitude exist:
+
+- Show that GPS data is available.
+- Display the existing map functionality.
+- Allow the administrator to view the reported location.
+
+If GPS coordinates are null:
+
+Show:
+
+"GPS location not available"
+
+Do not attempt to generate fake coordinates.
+
+==================================================
+STATUS UPDATE SAFETY
+==================================================
+
+When an administrator changes status:
+
+Update ONLY the status field.
+
+Do NOT overwrite:
+
+- complaintId
+- userId
+- userName
+- userEmail
+- title
+- issueType
+- description
+- imageUrl
+- latitude
+- longitude
+- location
+- createdAt
+
+The complaint data must remain intact.
+
+==================================================
+ALL REPORTS
+==================================================
+
+Make the existing "All Reports" section use actual Firestore data.
+
+Administrators should be able to:
+
+- view complaints
+- open complaint details
+- see status
+- see category
+- see location
+- see submission date
+- update status
+
+==================================================
+CITIZEN VIEW
+==================================================
+
+If the existing Admin Dashboard has a "Citizen View" or similar preview:
+
+Make sure it does not accidentally expose administrative controls.
+
+Do not allow citizens to access admin-only functionality.
+
+==================================================
+NEIGHBOURHOOD / LOCATION INFORMATION
+==================================================
+
+If the current dashboard contains neighbourhood/location statistics, use actual complaint location data where practical.
+
+Do NOT invent statistics.
+
+If there is insufficient real data, display an appropriate empty state instead.
+
+==================================================
+RESPONSIVE UI
+==================================================
+
+Keep the existing design.
+
+Make sure the Admin Dashboard remains usable on:
+
+- Desktop
+- Tablet
+- Mobile
+
+Do not redesign the application.
+
+==================================================
+PERFORMANCE
+==================================================
+
+Avoid unnecessary repeated Firestore reads.
+
+Reuse existing complaint data when possible.
+
+Do not introduce a large new dependency just for filtering or statistics.
+
+==================================================
+TESTING
+==================================================
+
+After implementation:
+
+1. Run TypeScript/typecheck.
+2. Run production build.
+3. Restart workflows if necessary.
+4. Check browser console.
+
+Then perform this real end-to-end test:
+
+TEST 1 — ADMIN ACCESS
+
+Sign in with the designated administrator account.
+
+Verify:
+- Admin Dashboard opens.
+- Normal citizen account cannot access Admin Dashboard.
+
+TEST 2 — REAL COMPLAINTS
+
+Verify complaints displayed in Admin Dashboard come from Firestore.
+
+Create at least one complaint if necessary.
+
+Verify it appears in the dashboard.
+
+TEST 3 — STATISTICS
+
+Verify dashboard statistics match the actual Firestore complaint counts.
+
+TEST 4 — FILTER
+
+Use the status filter.
+
+Verify filtering works.
+
+Use search.
+
+Verify complaint search works.
+
+TEST 5 — OPEN COMPLAINT
+
+Open a complaint.
+
+Verify:
+- image
+- category
+- description
+- location
+- complaint ID
+- date
+- GPS/map
+- citizen information
+are displayed when available.
+
+TEST 6 — STATUS
+
+Change:
+
+Submitted → Under Review
+
+Then:
+
+Under Review → In Progress
+
+Then:
+
+In Progress → Resolved
+
+Verify Firestore changes correctly.
+
+TEST 7 — DATA PRESERVATION
+
+After changing status, verify:
+- imageUrl remains unchanged
+- issueType remains unchanged
+- latitude remains unchanged
+- longitude remains unchanged
+- description remains unchanged
+- title remains unchanged
+- location remains unchanged
+
+TEST 8 — AI DATA
+
+For a complaint with AI classification, verify the existing AI result is displayed correctly.
+
+Do not run another AI request.
+
+TEST 9 — IMAGE
+
+Verify the Cloudinary image still displays.
+
+TEST 10 — MAP
+
+Verify the complaint's existing GPS location is displayed correctly.
+
+==================================================
+IMPORTANT
+==================================================
+
+Do NOT use demo/sample values when real Firestore data exists.
+
+Do NOT claim functionality is complete unless it has been tested.
+
+Do NOT modify the Project Presentation.
+
+At the end, report:
+
+1. Files modified
+2. Existing functionality preserved
+3. Admin features implemented
+4. Firestore queries/changes
+5. Filters implemented
+6. Statistics implementation
+7. Status management
+8. Security/admin authorization verification
+9. Tests performed
+10. Any remaining issues

@@ -1,0 +1,274 @@
+DAY 10 — FULL END-TO-END TESTING FOR URBANWATCH
+
+UrbanWatch Days 3–9 are implemented.
+
+I now want DAY 10 to focus on FULL SYSTEM TESTING.
+
+IMPORTANT:
+DO NOT add new major features.
+DO NOT redesign the UI.
+DO NOT modify the Project Presentation.
+
+Only fix bugs that are discovered during testing.
+
+Test the complete application end-to-end.
+
+==================================================
+TEST 1 — CITIZEN AUTHENTICATION
+==================================================
+
+Verify:
+
+- Register works.
+- Login works.
+- Logout works.
+- Session survives page refresh.
+- Normal authenticated users can access citizen pages.
+- Unauthenticated users cannot access protected pages.
+
+==================================================
+TEST 2 — CREATE COMPLAINT WITH ALL FEATURES
+==================================================
+
+Create a real test complaint containing:
+
+- Title
+- Description
+- AI-analyzed image
+- Confirmed AI category
+- Manual location
+- Current GPS location
+
+Verify the complete flow:
+
+Image
+→ Cloudinary
+→ AI classification
+→ Citizen confirmation
+→ Firestore
+→ Complaint Details
+
+Verify Firestore contains:
+
+- complaintId
+- userId
+- userName
+- userEmail
+- title
+- issueType
+- description
+- priority
+- status
+- imageUrl
+- latitude
+- longitude
+- location
+- createdAt
+
+==================================================
+TEST 3 — AI
+==================================================
+
+Use a real civic issue image.
+
+Verify:
+
+- AI request actually occurs.
+- AI returns one of the allowed categories.
+- Confidence is displayed.
+- Reason is displayed.
+- Citizen can change the suggested category.
+- Final selected category is saved to issueType.
+- AI failure allows manual category selection.
+
+Do not create fake AI results.
+
+==================================================
+TEST 4 — CLOUDINARY
+==================================================
+
+Verify:
+
+- Image uploads successfully.
+- Cloudinary HTTPS URL is saved to imageUrl.
+- Image appears in My Complaints.
+- Image appears in Complaint Details.
+- Image appears in Admin Dashboard.
+
+Verify no Firebase Storage dependency is used for new uploads.
+
+==================================================
+TEST 5 — GPS
+==================================================
+
+Create a complaint using current location.
+
+Verify:
+
+- Browser asks for location permission only after user action.
+- latitude is valid.
+- longitude is valid.
+- Firestore contains the coordinates.
+- Complaint Details shows the map.
+- Admin complaint view shows the map.
+
+Also test a complaint without GPS.
+
+Verify the application handles missing GPS gracefully.
+
+==================================================
+TEST 6 — COMPLAINT TRACKING
+==================================================
+
+Test:
+
+Submitted
+→ Under Review
+→ In Progress
+→ Resolved
+
+Verify:
+
+- Admin can change status.
+- Firestore updates correctly.
+- Citizen sees updated status.
+- Existing complaint information remains unchanged.
+
+==================================================
+TEST 7 — ADMIN SECURITY
+==================================================
+
+Test using a normal citizen account.
+
+Verify:
+
+- Citizen cannot access Admin Dashboard.
+- Citizen cannot read all complaints.
+- Citizen cannot change another user's complaint status.
+
+Test using administrator account.
+
+Verify:
+
+- Admin Dashboard opens.
+- Admin can view complaints.
+- Admin can update status.
+
+Do not weaken Firestore security rules.
+
+==================================================
+TEST 8 — ADMIN DASHBOARD
+==================================================
+
+Verify:
+
+- Total complaints is accurate.
+- Awaiting review is accurate.
+- In progress is accurate.
+- Resolved is accurate.
+- Reports needing attention uses real Firestore data.
+- All Reports uses real Firestore data.
+- Status filter works.
+- Category filter works.
+- Search works.
+
+==================================================
+TEST 9 — DATA PRESERVATION
+==================================================
+
+After admin status changes, verify these fields remain unchanged:
+
+- complaintId
+- userId
+- userName
+- userEmail
+- title
+- issueType
+- description
+- priority
+- imageUrl
+- latitude
+- longitude
+- location
+- createdAt
+
+==================================================
+TEST 10 — ERROR HANDLING
+==================================================
+
+Test appropriate failures:
+
+- Invalid login
+- Empty required complaint fields
+- Image larger than allowed size
+- Unsupported image type
+- AI request failure/timeout
+- Location permission denied
+- Missing GPS
+- Missing image
+
+The application should show understandable error messages and should not crash.
+
+==================================================
+TEST 11 — RESPONSIVE UI
+==================================================
+
+Check major pages on desktop and mobile widths:
+
+- Login
+- Register
+- Dashboard
+- Report Issue
+- My Complaints
+- Complaint Details
+- Admin Dashboard
+
+Look for:
+
+- overlapping elements
+- clipped buttons
+- unreadable text
+- horizontal scrolling
+- broken forms
+- broken images
+
+Only fix actual problems discovered.
+
+==================================================
+TEST 12 — CONSOLE / BUILD
+==================================================
+
+Run:
+
+- Frontend typecheck
+- API typecheck
+- Production build
+
+Check:
+
+- Browser console
+- API logs
+- Workflow logs
+
+There should be no unexplained errors.
+
+==================================================
+FINAL REPORT
+==================================================
+
+At the end, provide:
+
+1. Tests performed
+2. Tests passed
+3. Tests failed
+4. Bugs discovered
+5. Bugs fixed
+6. Remaining issues
+7. Security issues, if any
+8. Build/typecheck status
+9. Whether UrbanWatch is ready for final demo
+
+IMPORTANT:
+
+Do not claim a test passed unless it was actually performed.
+Do not invent test results.

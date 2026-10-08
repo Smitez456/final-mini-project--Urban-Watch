@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">UrbanWatch frontend source code evidence</title>
+  <desc id="desc">A screenshot-style code panel showing Firebase sign-in and frontend complaint submission logic from the UrbanWatch React application.</desc>
+  <rect width="1200" height="430" rx="22" fill="#15353c"/>
+  <rect width="1200" height="58" rx="22" fill="#204a50"/>
+  <rect y="36" width="1200" height="22" fill="#204a50"/>
+  <circle cx="31" cy="29" r="7" fill="#ef735e"/>
+  <circle cx="56" cy="29" r="7" fill="#e2a25d"/>
+  <circle cx="81" cy="29" r="7" fill="#79b6a9"/>
+  <text x="112" y="35" fill="#d7e6e0" font-family="Arial, sans-serif" font-size="20" font-weight="700">src/App.tsx · frontend implementation evidence</text>
+  <text x="42" y="92" fill="#8fc6ba" font-family="monospace" font-size="17">01</text>
+  <text x="78" y="92" fill="#f0d09b" font-family="monospace" font-size="17">import</text>
+  <text x="158" y="92" fill="#f7f3ea" font-family="monospace" font-size="17">{ signInWithEmailAndPassword }</text>
+  <text x="515" y="92" fill="#f0d09b" font-family="monospace" font-size="17">from</text>
+  <text x="570" y="92" fill="#efb979" font-family="monospace" font-size="17">'firebase/auth';</text>
+  <text x="42" y="120" fill="#8fc6ba" font-family="monospace" font-size="17">02</text>
+  <text x="78" y="120" fill="#f0d09b" font-family="monospace" font-size="17">import</text>
+  <text x="158" y="120" fill="#f7f3ea" font-family="monospace" font-size="17">{ firebaseAuth }</text>
+  <text x="385" y="120" fill="#f0d09b" font-family="monospace" font-size="17">from</text>
+  <text x="440" y="120" fill="#efb979" font-family="monospace" font-size="17">'@/lib/firebase';</text>
+  <text x="42" y="148" fill="#8fc6ba" font-family="monospace" font-size="17">03</text>
+  <text x="78" y="148" fill="#7eaaa5" font-family="monospace" font-size="17">// Firebase Email/Password authentication</text>
+  <text x="42" y="176" fill="#8fc6ba" font-family="monospace" font-size="17">04</text>
+  <text x="78" y="176" fill="#f0d09b" font-family="monospace" font-size="17">await</text>
+  <text x="137" y="176" fill="#f7f3ea" font-family="monospace" font-size="17">signInWithEmailAndPassword(</text>
+  <text x="137" y="204" fill="#f7f3ea" font-family="monospace" font-size="17">firebaseAuth, email.trim(), password);</text>
+  <text x="42" y="232" fill="#8fc6ba" font-family="monospace" font-size="17">05</text>
+  <text x="78" y="232" fill="#7eaaa5" font-family="monospace" font-size="17">// Protected report form submits authenticated evidence</text>
+  <text x="42" y="260" fill="#8fc6ba" font-family="monospace" font-size="17">06</text>
+  <text x="78" y="260" fill="#f0d09b" font-family="monospace" font-size="17">const</text>
+  <text x="140" y="260" fill="#f7f3ea" font-family="monospace" font-size="17">imageUrl = imageFile</text>
+  <text x="390" y="260" fill="#f0d09b" font-family="monospace" font-size="17">?</text>
+  <text x="420" y="260" fill="#f7f3ea" font-family="monospace" font-size="17">await uploadImageToCloudinary(</text>
+  <text x="420" y="288" fill="#f7f3ea" font-family="monospace" font-size="17">imageFile, await user.getIdToken())</text>
+  <text x="42" y="316" fill="#8fc6ba" font-family="monospace" font-size="17">07</text>
+  <text x="78" y="316" fill="#f0d09b" font-family="monospace" font-size="17">await</text>
+  <text x="137" y="316" fill="#f7f3ea" font-family="monospace" font-size="17">createComplaint({ ...report, imageUrl });</text>
+  <text x="42" y="344" fill="#8fc6ba" font-family="monospace" font-size="17">08</text>
+  <text x="78" y="344" fill="#7eaaa5" font-family="monospace" font-size="17">// Firestore persistence follows a successful upload</text>
+  <rect x="914" y="82" width="242" height="38" rx="19" fill="#ef735e"/>
+  <text x="1035" y="107" text-anchor="middle" fill="#fffaf0" font-family="Arial, sans-serif" font-size="16" font-weight="700">React + Firebase</text>
+  <rect x="914" y="132" width="242" height="38" rx="19" fill="#2b6566"/>
+  <text x="1035" y="157" text-anchor="middle" fill="#d7e6e0" font-family="Arial, sans-serif" font-size="16" font-weight="700">Authenticated upload</text>
+  <rect x="914" y="182" width="242" height="38" rx="19" fill="#b47942"/>
+  <text x="1035" y="207" text-anchor="middle" fill="#fffaf0" font-family="Arial, sans-serif" font-size="16" font-weight="700">Firestore complaint</text>
+</svg>

@@ -1,0 +1,138 @@
+[
+  {
+    "id": "slide-01-title",
+    "position": 1,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide01Title.tsx",
+    "title": "Title Slide",
+    "description": "Full-screen hero title slide with city background image, team names, guide, and institution."
+  },
+  {
+    "id": "slide-02-introduction",
+    "position": 2,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide02Introduction.tsx",
+    "title": "Introduction",
+    "description": "Overview of the Smart Citizen Assistant App and the civic issues it addresses."
+  },
+  {
+    "id": "slide-03-existing-system",
+    "position": 3,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide03ExistingSystem.tsx",
+    "title": "Existing System",
+    "description": "Analysis of current civic complaint systems and their limitations."
+  },
+  {
+    "id": "slide-06-research-gap",
+    "position": 4,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide06ResearchGap.tsx",
+    "title": "Research Gap",
+    "description": "Identified gaps in existing literature that this project addresses."
+  },
+  {
+    "id": "slide-07-problem-statement",
+    "position": 5,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide07ProblemStatement.tsx",
+    "title": "Problem Statement",
+    "description": "Formal problem statement defining the core challenge the app solves."
+  },
+  {
+    "id": "slide-08-scope-motivation",
+    "position": 6,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide08ScopeMotivation.tsx",
+    "title": "Scope & Motivation",
+    "description": "Project scope boundaries and the motivation driving this research."
+  },
+  {
+    "id": "slide-09-objectives",
+    "position": 7,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide09Objectives.tsx",
+    "title": "Objectives",
+    "description": "Specific objectives the Smart Citizen Assistant App aims to achieve."
+  },
+  {
+    "id": "slide-10-methodology",
+    "position": 8,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide10Methodology.tsx",
+    "title": "Methodology",
+    "description": "Research and development methodology including data collection, model training, and evaluation."
+  },
+  {
+    "id": "slide-11-modules",
+    "position": 9,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide11Modules.tsx",
+    "title": "System Modules",
+    "description": "Breakdown of the major functional modules within the system."
+  },
+  {
+    "id": "slide-12-architecture",
+    "position": 10,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide12Architecture.tsx",
+    "title": "System Architecture",
+    "description": "High-level architecture diagram and component interaction overview."
+  },
+  {
+    "id": "slide-13-tech-stack",
+    "position": 11,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide13TechStack.tsx",
+    "title": "Technology Stack",
+    "description": "Technologies, frameworks, and tools used to build the platform."
+  },
+  {
+    "id": "slide-14-requirements",
+    "position": 12,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide14Requirements.tsx",
+    "title": "Requirements",
+    "description": "Functional and non-functional requirements of the system."
+  },
+  {
+    "id": "slide-15-outcomes",
+    "position": 13,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide15Outcomes.tsx",
+    "title": "Expected Outcomes",
+    "description": "Anticipated results and measurable outcomes from the project."
+  },
+  {
+    "id": "slide-16-applications",
+    "position": 14,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide16Applications.tsx",
+    "title": "Applications",
+    "description": "Real-world application scenarios and use cases for the platform."
+  },
+  {
+    "id": "slide-17-future-scope",
+    "position": 15,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide17FutureScope.tsx",
+    "title": "Future Scope",
+    "description": "Planned enhancements and directions for future development."
+  },
+  {
+    "id": "slide-18-conclusion",
+    "position": 16,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide18Conclusion.tsx",
+    "title": "Conclusion",
+    "description": "Summary of the project and its contributions to smart city infrastructure."
+  },
+  {
+    "id": "slide-19-references",
+    "position": 17,
+    "kind": "jsx",
+    "filepath": "src/pages/slides/Slide19References.tsx",
+    "title": "References",
+    "description": "Academic references and citations used throughout the project."
+  }
+]

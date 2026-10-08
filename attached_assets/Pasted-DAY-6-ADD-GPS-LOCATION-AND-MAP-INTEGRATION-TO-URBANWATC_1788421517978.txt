@@ -1,0 +1,124 @@
+DAY 6 — ADD GPS LOCATION AND MAP INTEGRATION TO URBANWATCH
+
+Add GPS/geolocation functionality to the existing UrbanWatch application.
+
+IMPORTANT:
+- Do NOT modify or break Firebase Authentication.
+- Do NOT modify or break Firebase Firestore.
+- Do NOT modify or remove Cloudinary image upload.
+- Do NOT use Firebase Storage.
+- Do NOT ask me to upgrade Firebase.
+- Do NOT modify the Project Presentation.
+- Do NOT redesign the existing UI unless necessary for the GPS/map functionality.
+- Preserve all existing routes, pages and functionality.
+
+FIRST:
+Inspect the existing UrbanWatch Report Issue form and existing Firestore complaint structure.
+
+The existing complaint documents contain:
+- latitude
+- longitude
+- location
+
+Implement GPS using the browser's Geolocation API.
+
+REPORT ISSUE:
+
+Add a clear "Use My Current Location" button to the existing Location section.
+
+When the citizen clicks it:
+
+1. Request browser location permission.
+2. Obtain the user's current latitude and longitude.
+3. Show a loading state while obtaining the location.
+4. Display the coordinates or a friendly location confirmation.
+5. Store the latitude and longitude in the complaint data.
+6. Keep the existing Location field/UI as much as possible.
+
+IMPORTANT:
+- Do not automatically request GPS permission when the page loads.
+- Only request location after the user clicks "Use My Current Location".
+- If permission is denied, show a clear user-friendly message.
+- If GPS is unavailable, show a useful error message.
+- Allow the user to continue with a manually entered location if GPS is unavailable.
+
+FIRESTORE:
+
+When submitting a complaint:
+- Save the actual GPS latitude to the existing latitude field.
+- Save the actual GPS longitude to the existing longitude field.
+- Preserve the existing location field.
+- Do not overwrite valid GPS coordinates with null.
+- If the user does not provide GPS coordinates, latitude and longitude may remain null.
+
+MAP:
+
+Add a map to the Report Issue page or the appropriate location section.
+
+The map should:
+- Show the selected/current GPS position.
+- Update when the user obtains a new location.
+- Allow the user to understand where the complaint is being reported.
+
+Use the mapping technology already present in the project if one exists.
+
+If no map library is currently installed, use a suitable web mapping solution that does not require unnecessary paid services.
+
+Prefer an OpenStreetMap-based solution such as Leaflet if appropriate.
+
+Do not add a paid Google Maps API requirement unless absolutely necessary.
+
+COMPLAINT DETAILS:
+
+Update Complaint Details so that when latitude and longitude exist:
+- Display the complaint location on a map.
+- Show the coordinates if useful.
+
+MY COMPLAINTS:
+
+If location information exists, indicate that location data is available.
+
+ADMIN DASHBOARD:
+
+If latitude and longitude exist for a complaint:
+- Allow the administrator to view the complaint location on a map or location section.
+- Do not break the existing Admin Dashboard.
+
+VALIDATION:
+
+- Latitude must be between -90 and 90.
+- Longitude must be between -180 and 180.
+- Handle permission denied.
+- Handle location unavailable.
+- Handle timeout.
+- Handle browser/device geolocation errors.
+
+SECURITY/PRIVACY:
+
+- Do not expose any secret API keys.
+- Do not add unnecessary location tracking.
+- Only capture the location when the citizen explicitly requests it using the location button.
+- Do not continuously track the user.
+
+COMPATIBILITY:
+
+Make sure the feature works on desktop browsers and mobile browsers where browser geolocation is supported.
+
+AFTER IMPLEMENTATION:
+
+Run type checks.
+Run the production build.
+Test the Report Issue page.
+Test the "Use My Current Location" button.
+Test permission handling.
+Submit a complaint with GPS enabled.
+Verify that Firestore contains real latitude and longitude values.
+Verify that the map displays the correct location.
+Verify that complaints without GPS still work.
+Verify that Firebase Authentication, Firestore, and Cloudinary image upload still work.
+
+Finally tell me:
+1. Which files were changed.
+2. Which map technology was used.
+3. How GPS coordinates are saved to Firestore.
+4. How I can test the feature.

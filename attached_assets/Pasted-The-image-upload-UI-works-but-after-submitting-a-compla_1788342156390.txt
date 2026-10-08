@@ -1,0 +1,62 @@
+The image upload UI works, but after submitting a complaint, the Firestore complaint document still has imageUrl: null even when an image was selected.
+
+Please debug and FIX the complete image upload flow.
+
+IMPORTANT:
+- Do not modify Firebase Authentication.
+- Do not modify the existing Firestore structure unnecessarily.
+- Do not use Firebase Storage.
+- Do not ask me to upgrade Firebase.
+- Do not redesign the UI.
+- Keep the existing UrbanWatch application intact.
+
+FIRST inspect the current implementation and identify why imageUrl is being saved as null.
+
+Verify all of these steps:
+
+1. The frontend correctly obtains the selected image File.
+2. The frontend sends the image to the backend upload endpoint.
+3. The backend receives the multipart image correctly.
+4. The backend reads:
+   CLOUDINARY_CLOUD_NAME
+   CLOUDINARY_API_KEY
+   CLOUDINARY_API_SECRET
+   from the server environment.
+5. The backend uploads the image to Cloudinary.
+6. Cloudinary returns a successful upload response.
+7. Extract the secure HTTPS URL from the Cloudinary response.
+8. Return that URL from the backend to the frontend.
+9. The complaint creation code waits for the Cloudinary upload to finish.
+10. The returned Cloudinary URL is passed into the Firestore complaint document.
+11. Firestore saves the URL in the existing image URL field, which appears to be imageUrl.
+12. Make sure imageUrl is NOT overwritten with null after the upload succeeds.
+
+Add useful error handling so that if Cloudinary upload fails, the user sees a clear error instead of silently saving imageUrl as null.
+
+Do NOT log or expose CLOUDINARY_API_SECRET.
+
+Also check whether the current complaint submission creates the Firestore document BEFORE the image upload. If so, change the flow so the image upload completes first and then the complaint is saved with the returned Cloudinary URL.
+
+Expected flow:
+
+Select image
+→ frontend File object
+→ backend upload endpoint
+→ Cloudinary
+→ secure HTTPS URL
+→ frontend receives URL
+→ Firestore complaint created with imageUrl = Cloudinary URL
+
+After fixing:
+- Run type checks.
+- Run the production build.
+- Test a complaint with an image.
+- Verify the Cloudinary upload succeeds.
+- Verify the Firestore document contains a non-null imageUrl.
+- Verify the image displays in My Complaints and Complaint Details.
+- Verify a complaint without an image still works with imageUrl = null.
+
+Finally, tell me:
+1. What caused imageUrl to be null.
+2. Which files you changed.
+3. How you fixed the upload flow.

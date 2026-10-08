@@ -1,0 +1,92 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && (
+          ('admin' in request.auth.token && request.auth.token.admin == true)
+          || ('role' in request.auth.token && request.auth.token.role == 'admin')
+        );
+    }
+
+    function isValidStatus(status) {
+      return status in ['Submitted', 'Under Review', 'In Progress', 'Resolved'];
+    }
+
+    function isValidDepartmentStatus(status) {
+      return status in ['Assigned', 'Acknowledged', 'In Progress', 'Resolved', 'Rejected', 'Escalated'];
+    }
+
+    // Complaints collection
+    match /complaints/{complaintId} {
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.complaintId == complaintId
+        && request.resource.data.status == 'Submitted';
+
+      // Citizens can read their own complaints, or public issue details for nearby civic alerts / map; Admins can read all
+      allow read: if isSignedIn();
+
+      // Admins can update status, department assignment, remarks, and traffic risk
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status',
+          'departmentId',
+          'departmentName',
+          'departmentStatus',
+          'assignedAt',
+          'assignedBy',
+          'departmentRemarks',
+          'estimatedResolutionTime',
+          'trafficRisk'
+        ])
+        && (
+          !('status' in request.resource.data.diff(resource.data).affectedKeys())
+          || isValidStatus(request.resource.data.status)
+        )
+        && (
+          !('departmentStatus' in request.resource.data.diff(resource.data).affectedKeys())
+          || isValidDepartmentStatus(request.resource.data.departmentStatus)
+        );
+
+      allow delete: if false;
+    }
+
+    // Unified Alerts collection (traffic, civic, flood, weather, road hazard)
+    match /alerts/{alertId} {
+      // Any signed-in user or system can create an alert when filing a high-risk report
+      allow create: if isSignedIn();
+
+      // Users can read alerts directed to them, or global/broadcast alerts (userId == null or matches auth uid)
+      allow read: if isSignedIn();
+
+      // Users can mark their own alerts read; admins can update status/deactivate
+      allow update: if isSignedIn()
+        && (
+          isAdmin()
+          || (
+            resource.data.userId == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead'])
+          )
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    // User Notification Preferences
+    match /userPreferences/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Weather and Flood Alerts (read-only for citizens, manageable by admin)
+    match /weatherAlerts/{alertId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}

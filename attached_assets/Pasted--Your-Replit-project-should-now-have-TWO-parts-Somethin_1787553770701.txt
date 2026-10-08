@@ -1,0 +1,251 @@
+ Your Replit project should now have TWO parts
+
+Something like:
+
+```text
+SMART CITIZEN ASSISTANT
+│
+├── 📊 Project Presentation
+│
+└── 💻 Application
+      │
+      ├── Login
+      ├── Register
+      ├── Dashboard
+      ├── Report Issue
+      ├── My Complaints
+      ├── Complaint Details
+      └── Admin Dashboard
+```
+
+This is what we want.
+
+---
+
+# STEP 5 — Check the Login page
+
+Click your **Application → Login**.
+
+It should look approximately like:
+
+```text
+        SMART CITIZEN
+        ASSISTANT
+
+    Email
+    ┌─────────────────────┐
+    │                     │
+    └─────────────────────┘
+
+    Password
+    ┌─────────────────────┐
+    │                     │
+    └─────────────────────┘
+
+          [ LOGIN ]
+
+      Create an account
+```
+
+Don't worry if yours looks different.
+
+We're looking for the **function and structure**, not perfection.
+
+---
+
+# STEP 6 — Check Register
+
+You should have:
+
+```text
+       CREATE ACCOUNT
+
+Name
+[____________________]
+
+Email
+[____________________]
+
+Password
+[____________________]
+
+Confirm Password
+[____________________]
+
+       [ REGISTER ]
+
+Already have an account?
+Login
+```
+
+Again, it doesn't need to actually register yet.
+
+That's **Day 3**.
+
+---
+
+# STEP 7 — Check the Citizen Dashboard
+
+This is where your actual application begins.
+
+It should have something similar to:
+
+```text
+┌─────────────────────────────────────────┐
+│ SMART CITIZEN ASSISTANT        👤 Mark │
+├─────────────────────────────────────────┤
+│                                         │
+│ Welcome back!                           │
+│                                         │
+│   ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+│   │    4    │ │    2    │ │    2    │ │
+│   │ Complaints│ │ Pending │ │ Resolved│ │
+│   └─────────┘ └─────────┘ └─────────┘ │
+│                                         │
+│       [ + REPORT AN ISSUE ]             │
+│                                         │
+│ Recent Complaints                      │
+│                                         │
+│ Pothole       HIGH       Pending        │
+│ Garbage       MEDIUM     Resolved       │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+At this stage the numbers can be **dummy numbers**.
+
+We'll connect them to Firebase later.
+
+---
+
+# STEP 8 — Check Report Issue
+
+This page is extremely important.
+
+It should eventually look something like:
+
+```text
+        REPORT CIVIC ISSUE
+
+Upload Image
+┌──────────────────────────┐
+│                          │
+│       📷                 │
+│   Upload an image        │
+│                          │
+└──────────────────────────┘
+
+Description
+┌──────────────────────────┐
+│ Describe the problem...  │
+└──────────────────────────┘
+
+Location
+📍 Location not detected
+
+        [ DETECT LOCATION ]
+
+Issue Type
+[ AI will detect ]
+
+Priority
+[ Automatically assigned ]
+
+        [ SUBMIT REPORT ]
+```
+
+**Don't implement any of those functions today.**
+
+We're only creating the interface.
+
+---
+
+# STEP 9 — Check My Complaints
+
+Create a page like:
+
+```text
+             MY COMPLAINTS
+
+┌─────────────────────────────────────┐
+│ SC1024                              │
+│ 🚧 Pothole                          │
+│                                     │
+│ Priority: HIGH                      │
+│ Status: Under Review                │
+│                                     │
+│              [ VIEW DETAILS ]       │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ SC1023                              │
+│ 🗑️ Garbage                          │
+│                                     │
+│ Priority: MEDIUM                    │
+│ Status: Resolved                    │
+│                                     │
+│              [ VIEW DETAILS ]       │
+└─────────────────────────────────────┘
+```
+
+Again, dummy data for now.
+
+---
+
+# STEP 10 — Complaint Details
+
+When you click a complaint:
+
+```text
+             COMPLAINT #SC1024
+
+              🚧 POTHOLE
+
+Description:
+Large pothole near the main road.
+
+Priority:
+🔴 HIGH
+
+Location:
+📍 Map will appear here
+
+Status:
+
+✓ Submitted
+✓ Under Review
+○ Assigned
+○ In Progress
+○ Resolved
+○ Verified
+```
+
+Later we'll connect the map and status to the database.
+
+---
+
+# STEP 11 — Admin Dashboard
+
+Create the second major part:
+
+```text
+             ADMIN DASHBOARD
+
+┌─────────┐ ┌─────────┐ ┌─────────┐
+│   124   │ │    38   │ │    71   │
+│  Total  │ │ Pending │ │ Resolved│
+└─────────┘ └─────────┘ └─────────┘
+
+
+RECENT CIVIC ISSUES
+
+ID       ISSUE        PRIORITY     STATUS
+
+SC1024   Pothole      HIGH         Pending
+SC1025   Garbage      MEDIUM       Progress
+SC1026   Water Leak   HIGH         Resolved
+```
+
+
+---
+

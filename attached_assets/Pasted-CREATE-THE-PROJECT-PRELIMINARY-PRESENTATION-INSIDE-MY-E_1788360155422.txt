@@ -1,0 +1,373 @@
+CREATE THE PROJECT PRELIMINARY PRESENTATION INSIDE MY EXISTING URBANWATCH REPLIT PROJECT.
+
+IMPORTANT:
+- Do NOT modify, delete, break, or redesign the existing UrbanWatch application.
+- Do NOT modify Firebase Authentication.
+- Do NOT modify Firebase Firestore.
+- Do NOT modify Cloudinary image upload functionality.
+- Do NOT remove any existing pages or features.
+- Keep the existing Project Presentation available.
+- Create/update ONLY the presentation portion of the project.
+- The presentation must be suitable for my college preliminary project presentation on 3 September 2026.
+
+My teacher provided the following required presentation contents and order:
+
+1. MOTIVATION
+2. PROBLEM STATEMENT
+3. GOALS AND OBJECTIVES
+4. ASSUMPTIONS AND RISKS
+5. PROJECT SCOPE AND TARGET GROUP
+6. RESOURCES NEEDED
+7. LITERATURE SURVEY
+8. ARCHITECTURE / BLOCK DIAGRAM
+9. ALGORITHMS USED
+10. ROLES ASSIGNED
+11. PROJECT TIMELINE
+12. CONCLUSION
+
+IMPORTANT TEACHER REQUIREMENTS:
+- Literature review must contain 10 papers.
+- Every paper must have publication year 2024 or later.
+- Prefer/restrict sources to reputable publishers/venues such as IEEE, Elsevier/ScienceDirect, Springer, MDPI, Scientific Reports, Web of Science/Scopus-indexed publications where verifiable.
+- Literature review should be presented as a table with columns:
+  Paper Title | Authors | Publication/Venue + Year | Method | Advantages | Disadvantages
+- Under the paper title, publication name and year may also be shown.
+- After the conclusion slide, there MUST be a separate slide titled:
+  "Code Snippets / Screenshots"
+- This slide must contain screenshots/code evidence from the ACTUAL UrbanWatch project, not fabricated screenshots.
+- The teacher said deployed portions should be shown tomorrow, so include a section for screenshots of the deployed application.
+- Do not expose API keys, passwords, Firebase private credentials, Cloudinary API secret, or other secrets in screenshots.
+
+PRESENTATION CONTENT:
+
+PROJECT TITLE:
+"UrbanWatch – AI-Powered Smart Citizen Assistant for Civic Issue Reporting"
+
+Use the project concept already implemented in this project:
+Citizens can report civic problems such as potholes, garbage accumulation, damaged streetlights and water leakage. The system supports authentication, complaint storage, image evidence, location information, AI-assisted issue classification, complaint tracking and an administrator dashboard.
+
+SLIDE 1 — TITLE
+UrbanWatch
+AI-Powered Smart Citizen Assistant for Civic Issue Reporting
+
+Include:
+- Project title
+- Team members placeholder
+- Guide placeholder
+- Department/college placeholder
+- Preliminary Project Presentation
+- Date: 3 September 2026
+
+SLIDE 2 — MOTIVATION
+Explain:
+- Urban problems require timely reporting and follow-up.
+- Citizens may face difficulty finding the correct complaint channel.
+- Traditional complaint systems can be slow or fragmented.
+- Photographic evidence and location information improve complaint quality.
+- Digital citizen participation supports smart-city development.
+- Relate the project to SDG 9 and SDG 11.
+
+SLIDE 3 — PROBLEM STATEMENT
+Explain:
+- Civic complaints may be reported through disconnected channels.
+- Reports may lack photographs, precise location or structured categories.
+- Manual sorting and prioritization can delay action.
+- Citizens may have limited visibility into complaint status.
+- There is a need for a unified citizen-to-administrator civic issue reporting and tracking platform.
+
+SLIDE 4 — GOALS AND OBJECTIVES
+Include:
+- Develop a web-based civic issue reporting platform.
+- Allow citizens to submit structured complaints.
+- Allow image evidence to be attached to complaints.
+- Capture geographic information.
+- Use AI-assisted classification of civic issues.
+- Store complaints securely.
+- Allow citizens to track complaints.
+- Provide an administrator dashboard.
+- Improve transparency through status tracking and future citizen verification.
+
+SLIDE 5 — ASSUMPTIONS AND RISKS
+Create a professional table.
+
+Assumptions:
+- Users have internet access.
+- Users provide genuine complaint information.
+- Users provide useful photographs.
+- Users grant GPS permission when required.
+- Cloud services are available.
+
+Risks and mitigation:
+- False reports → authentication and administrator review.
+- Poor network → retry/error handling.
+- GPS denied → manual location option.
+- Invalid/large images → file validation.
+- AI misclassification → administrator correction/review.
+- Cloud-service failure → clear error handling.
+
+SLIDE 6 — PROJECT SCOPE AND TARGET GROUP
+Target groups:
+- Citizens/residents
+- Municipal/maintenance administrators
+- City management teams
+
+In scope:
+- Authentication
+- Complaint creation
+- Image evidence
+- Location capture
+- Firestore database
+- Cloudinary image storage
+- AI-assisted classification
+- Complaint status tracking
+- Admin dashboard
+
+Out of scope:
+- Direct government ERP integration
+- Emergency dispatch
+- Payment processing
+- Full-scale municipal deployment
+
+Clearly state that this is an academic prototype.
+
+SLIDE 7 — RESOURCES NEEDED
+Software:
+- Replit
+- React/TypeScript or the actual frontend technology used by the project
+- Firebase Authentication
+- Firebase Firestore
+- Cloudinary
+- Browser Geolocation API
+- Map service
+- AI/ML component
+- Git/version control
+
+Hardware:
+- Laptop/desktop
+- Smartphone camera
+- GPS-enabled smartphone for testing
+
+IMPORTANT:
+Use the actual technologies currently present in my UrbanWatch project where possible. Do not claim that a technology is implemented if it is not actually implemented yet.
+
+SLIDES 8 AND 9 — LITERATURE SURVEY
+Create a literature survey covering exactly 10 papers.
+
+Requirements:
+- Publication year must be 2024 or later.
+- Prioritize reputable academic publishers/venues.
+- Include papers related to:
+  - Smart cities
+  - Civic issue reporting
+  - Citizen participation
+  - AI in smart cities
+  - Pothole detection
+  - Image-based urban issue detection
+  - IoT/AI smart-city systems
+  - Digital governance
+- Do not invent authors, venues, DOI numbers or publication details.
+- Verify bibliographic information before adding it.
+- If a paper cannot be verified, do not use it.
+
+Use a table:
+Paper Title | Authors | Publication/Venue + Year | Method | Advantages | Disadvantages
+
+Use 5 papers on the first literature slide and 5 on the second if needed for readability.
+
+Include a short "Research Gap" section after the tables:
+Existing research often focuses on individual components such as AI detection, smart-city governance or social-media reporting. UrbanWatch aims to combine citizen reporting, evidence, location, AI-assisted categorization, secure storage and administrator tracking into one academic prototype.
+
+SLIDE 10 — ARCHITECTURE / BLOCK DIAGRAM
+
+Create a clean architecture diagram:
+
+Citizen
+↓
+UrbanWatch Web Application
+↓
+Firebase Authentication
+↓
+Report Issue Module
+↓
+Backend Upload Endpoint
+↓
+Cloudinary Image Storage
+↓
+Firebase Firestore
+↓
+AI Classification
+↓
+Admin Dashboard
+↓
+Complaint Status Update
+↓
+Citizen Complaint Tracking
+
+Also show GPS/Map integration connected to the complaint/reporting module.
+
+Use arrows and clear module names.
+
+SLIDE 11 — ALGORITHMS USED
+Include only algorithms/technical processes actually relevant to UrbanWatch:
+
+- Firebase authentication/session management
+- User-specific Firestore complaint retrieval
+- Image file validation
+- Cloudinary server-side image upload
+- Geolocation using browser Geolocation API
+- AI image classification/detection
+- Priority assignment logic
+- Complaint filtering/status tracking
+
+Clearly label AI classification as "AI-assisted" if the final model is not yet implemented.
+
+SLIDE 12 — ROLES ASSIGNED
+
+Create a professional table:
+
+Team Member | Role | Key Responsibilities
+
+Use placeholders:
+[Member 1]
+[Member 2]
+[Member 3]
+[Member 4]
+
+Suggested roles:
+- Frontend/UI
+- Backend/Database
+- AI/ML
+- Integration/Testing
+- Documentation/Presentation if a fifth member exists
+
+Do not invent actual team member names.
+
+SLIDE 13 — PROJECT TIMELINE
+
+Create a timeline suitable for the project.
+
+Use these implementation stages where appropriate:
+
+Day/Phase 1:
+Application structure and pages
+
+Day/Phase 2:
+UI completion and polishing
+
+Day/Phase 3:
+Firebase Authentication
+
+Day/Phase 4:
+Firebase Firestore complaint database
+
+Day/Phase 5:
+Cloudinary image upload
+
+Day/Phase 6:
+GPS and Maps
+
+Day/Phase 7:
+AI issue detection/classification
+
+Day/Phase 8:
+Complaint tracking
+
+Day/Phase 9:
+Admin functionality
+
+Day/Phase 10:
+Full testing
+
+Day/Phase 11:
+Final UI polish, diagrams and demo data
+
+Day/Phase 12:
+Final presentation and complete demo
+
+Make the timeline visually clean.
+
+SLIDE 14 — CONCLUSION
+Explain:
+- UrbanWatch provides a unified digital approach for civic issue reporting.
+- Citizens can submit structured complaints with evidence.
+- Cloud services support authentication, complaint storage and image storage.
+- Location and AI can improve issue identification and prioritization.
+- Administrators can monitor and manage complaints.
+- The system demonstrates a practical smart-city citizen-assistance prototype.
+- Future work can include municipal integration, multilingual support, duplicate detection and advanced analytics.
+
+SLIDE 15 — CODE SNIPPETS / SCREENSHOTS
+THIS MUST COME IMMEDIATELY AFTER THE CONCLUSION.
+
+Title exactly:
+"Code Snippets / Screenshots"
+
+Include ACTUAL screenshots from the current UrbanWatch application/code where possible:
+
+1. Firebase Authentication
+   - Login/Register implementation or working screen
+
+2. Firestore
+   - Complaint document / complaint-saving implementation
+
+3. Cloudinary
+   - Server-side image upload implementation
+   - Make sure CLOUDINARY_API_SECRET and all credentials are hidden
+
+4. Report Issue
+   - Actual working Report Issue page
+
+5. My Complaints
+   - Actual complaint list
+
+6. Admin Dashboard
+   - Actual admin dashboard
+
+7. Deployed Application
+   - Screenshot of the deployed/running UrbanWatch application
+
+IMPORTANT:
+Do not fabricate screenshots.
+If automatic screenshots cannot be captured, create clearly labeled placeholders such as:
+"INSERT ACTUAL SCREENSHOT HERE"
+so I can replace them manually.
+
+Do not show:
+- API keys
+- API secrets
+- Passwords
+- Firebase private credentials
+- Cloudinary API secret
+- Environment variables containing secret values
+
+SLIDE 16 — REFERENCES
+Include references for the 10 literature-review papers.
+
+Use a consistent academic citation format.
+
+DESIGN:
+- Professional college-project presentation.
+- Clean modern smart-city/technology appearance.
+- Consistent typography.
+- Avoid excessive animations.
+- Keep text readable.
+- Tables should be readable and not overcrowded.
+- Use diagrams where appropriate.
+- Do not make slides excessively text-heavy.
+- Preserve the existing UrbanWatch application design.
+
+FINAL REQUIREMENT:
+Before finishing, inspect the existing UrbanWatch project and make sure the presentation accurately reflects the features that are ACTUALLY implemented.
+
+Do not claim Firebase Storage is implemented because we replaced it with Cloudinary.
+
+Do not claim GPS or AI is fully implemented if those features have not yet been completed.
+
+After creating the presentation:
+1. Verify all required sections are present.
+2. Verify the Code Snippets / Screenshots slide is immediately after Conclusion.
+3. Verify exactly 10 literature-review papers are included.
+4. Verify all literature papers are 2024 or newer.
+5. Verify references match the literature table.
+6. Verify no secrets are visible.
+7. Keep the existing UrbanWatch application untouched.

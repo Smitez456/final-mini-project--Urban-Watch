@@ -1,0 +1,383 @@
+DAY 7 — IMPLEMENT REAL AI-ASSISTED CIVIC ISSUE IMAGE CLASSIFICATION
+
+We have completed Days 3–6 of UrbanWatch.
+
+The existing application already has:
+- Firebase Authentication
+- Firebase Firestore
+- Cloudinary image uploads
+- GPS coordinates
+- OpenStreetMap/Leaflet
+- Complaint creation and viewing
+- Admin dashboard
+
+I now want to implement DAY 7: REAL AI-ASSISTED IMAGE CLASSIFICATION.
+
+IMPORTANT — DO NOT BREAK EXISTING FEATURES
+
+Before modifying anything:
+- Inspect the existing implementation.
+- Make the smallest changes necessary.
+- Do NOT modify Firebase Authentication.
+- Do NOT replace or redesign Firestore.
+- Do NOT modify the existing Cloudinary upload implementation.
+- Do NOT modify GPS functionality.
+- Do NOT modify Maps functionality.
+- Do NOT modify the Project Presentation.
+- Do NOT redesign the existing UI.
+
+AI MUST BE REAL.
+
+Do NOT:
+- hard-code "Pothole"
+- randomly choose a category
+- determine category from filename
+- use keywords from the issue title
+- create a fake AI button
+- simulate confidence scores
+- claim AI works without actually calling a vision model.
+
+==================================================
+AI CLASSIFICATION
+==================================================
+
+The AI must analyze the uploaded complaint image and classify it into EXACTLY ONE of these categories:
+
+1. Pothole
+2. Garbage/Waste
+3. Damaged Streetlight
+4. Water Leakage
+5. Other/Unknown
+
+The AI response must contain:
+
+- category
+- confidence
+- short explanation
+
+Example:
+
+{
+  "category": "Pothole",
+  "confidence": 0.91,
+  "reason": "The image shows a visible depression and damage in the road surface."
+}
+
+The confidence is a model estimate and must NOT be described as a scientifically calibrated probability.
+
+==================================================
+ARCHITECTURE
+==================================================
+
+Use this flow:
+
+User selects image
+        ↓
+Existing Cloudinary upload
+        ↓
+Cloudinary HTTPS image URL
+        ↓
+Frontend calls UrbanWatch backend
+        ↓
+POST /api/classify/image
+        ↓
+Backend authenticates Firebase user
+        ↓
+Backend validates the Cloudinary URL
+        ↓
+Backend sends image to the REAL vision model
+        ↓
+Vision model returns category + confidence + reason
+        ↓
+Backend validates the category
+        ↓
+Frontend displays AI result
+        ↓
+User can confirm/change category
+        ↓
+Final selected category is saved to Firestore issueType
+
+The browser must NEVER contain:
+- OpenAI API key
+- Cloudinary API secret
+- any other server-side secret.
+
+==================================================
+AI PROVIDER
+==================================================
+
+Use the simplest reliable real vision-model integration available in this Replit project.
+
+Prefer Replit AI Integrations/OpenAI if it is already available and supported.
+
+If the integration is not already configured, STOP before implementing the provider-specific portion and tell me exactly what I need to enable/configure.
+
+Do NOT silently substitute a fake model.
+
+If a direct provider API is required:
+- store the API key as a Replit server-side Secret
+- do NOT use a VITE_ prefixed secret
+- never expose the key to the browser
+- never commit the key to source control
+
+==================================================
+BACKEND
+==================================================
+
+Create:
+
+artifacts/api-server/src/routes/classify.ts
+
+Add:
+
+POST /api/classify/image
+
+The endpoint should:
+
+1. Verify Firebase authentication.
+2. Accept the Cloudinary HTTPS image URL.
+3. Validate that the URL belongs to our configured Cloudinary hostname.
+4. Reject arbitrary external URLs.
+5. Reject missing/invalid image URLs.
+6. Send the image to the real vision model.
+7. Request structured JSON output.
+8. Validate the returned category against EXACTLY:
+
+Pothole
+Garbage/Waste
+Damaged Streetlight
+Water Leakage
+Other/Unknown
+
+9. Validate confidence is a number between 0 and 1.
+10. Return a clean response to the frontend.
+
+Example:
+
+{
+  "category": "Pothole",
+  "confidence": 0.91,
+  "reason": "The image shows damage in the road surface."
+}
+
+If the model response is invalid:
+- return an appropriate error
+- DO NOT invent a category
+- DO NOT invent a confidence score.
+
+==================================================
+AI PROMPT
+==================================================
+
+Use a strict vision classification instruction similar to:
+
+"You are an AI assistant for a civic issue reporting application.
+
+Analyze the provided image.
+
+Classify the visible civic issue into exactly one of:
+
+Pothole
+Garbage/Waste
+Damaged Streetlight
+Water Leakage
+Other/Unknown
+
+Only select a category when there is reasonable visual evidence.
+
+If the image does not clearly match one of the first four categories, select Other/Unknown.
+
+Return only structured JSON containing:
+category
+confidence
+reason
+
+Do not return any other category."
+
+Make sure the actual implementation uses the provider's supported structured-output mechanism if available.
+
+==================================================
+FRONTEND
+==================================================
+
+Create:
+
+artifacts/smart-citizen-app/src/lib/classification.ts
+
+This helper should call:
+
+POST /api/classify/image
+
+and send:
+
+{
+  "imageUrl": "<Cloudinary HTTPS URL>"
+}
+
+using the Firebase user's ID token for authentication.
+
+In the existing Report Issue form:
+
+1. Keep the existing image upload.
+2. Upload the image to Cloudinary first.
+3. Wait for the Cloudinary URL.
+4. Call the AI classification endpoint.
+5. Show a clear loading state:
+
+"AI is analyzing your image..."
+
+6. Display the result:
+
+AI Detection
+Pothole
+Confidence: 91%
+Reason: ...
+
+7. Allow the citizen to confirm or change the issue category.
+
+IMPORTANT:
+
+The AI result should be a SUGGESTION.
+
+The citizen must remain able to select a different category.
+
+==================================================
+FIRESTORE
+==================================================
+
+Use the existing:
+
+issueType
+
+field.
+
+Do NOT create unnecessary new Firestore fields unless absolutely required.
+
+The final confirmed/selected category should be saved as:
+
+issueType
+
+The existing:
+
+imageUrl
+
+must continue storing the Cloudinary HTTPS URL.
+
+Do not modify the existing Firestore architecture.
+
+==================================================
+SUBMISSION FLOW
+==================================================
+
+The final report flow should be:
+
+1. User enters report details.
+2. User selects an image.
+3. Image uploads to Cloudinary.
+4. Cloudinary returns imageUrl.
+5. AI analyzes imageUrl.
+6. AI result is displayed.
+7. User confirms or changes category.
+8. Complaint is saved to Firestore.
+9. imageUrl contains the Cloudinary URL.
+10. issueType contains the final selected category.
+11. GPS latitude/longitude continue working exactly as before.
+
+Do NOT save the complaint with issueType = null simply because AI fails.
+
+If AI classification fails:
+- clearly tell the user AI analysis failed
+- allow manual category selection
+- allow the complaint to continue using the user's manually selected category.
+
+==================================================
+UI
+==================================================
+
+Keep the current UrbanWatch design.
+
+Only add the minimum UI necessary for:
+
+- AI analyzing/loading state
+- AI result
+- confidence
+- reason
+- confirm/change category
+- AI error/fallback state
+
+Do not redesign the Report Issue page.
+
+Make it responsive on desktop and mobile.
+
+==================================================
+SECURITY
+==================================================
+
+Never expose:
+
+- AI API keys
+- Cloudinary API secret
+- Firebase server credentials
+
+Validate all backend input.
+
+Do not allow the classification endpoint to fetch arbitrary URLs.
+
+Only accept HTTPS Cloudinary URLs belonging to our configured Cloudinary account/hostname.
+
+==================================================
+BACKWARD COMPATIBILITY
+==================================================
+
+Existing complaints must continue working.
+
+Existing complaints may have:
+
+- old issueType values
+- imageUrl = null
+- Firebase Storage URLs from older data
+
+Do not break their display.
+
+The new AI system only applies to new reports where an image is available.
+
+==================================================
+TESTING
+==================================================
+
+After implementation:
+
+1. Run TypeScript/type checking.
+2. Run production build.
+3. Restart the application if required.
+4. Check browser console for errors.
+5. Test a real pothole image.
+6. Confirm the AI actually analyzes the image.
+7. Confirm a category is returned.
+8. Confirm confidence is returned.
+9. Confirm reason is returned.
+10. Confirm the user can change the category.
+11. Submit the complaint.
+12. Verify Firestore:
+    - issueType = final selected category
+    - imageUrl = Cloudinary HTTPS URL
+    - latitude/longitude remain correct
+13. Verify the image still appears in:
+    - My Complaints
+    - Complaint Details
+    - Admin Dashboard
+
+DO NOT declare Day 7 complete if the AI provider is not actually called.
+
+At the end, report:
+
+1. AI provider/model used
+2. Files created
+3. Files modified
+4. Environment variables/secrets required
+5. Exact AI flow
+6. Test result using a real image
+7. Whether Firestore saved the final category correctly
+8. Any remaining limitations
+
+Do not modify the Project Presentation.
